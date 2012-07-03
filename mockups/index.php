@@ -9,12 +9,12 @@ $classes = array(
         "Films" => "films",
         "Toetsen" => "quizzes");
 
-$sub_columns = array("0001", "0002", "0003", "0004", "0005");
+$sub_columns = array("0009T", "0035T", "0086T", "0004", "0005");
 
 $sub_column_titles = array(
-        "0001" => "Title 1",
-        "0002" => "Title 2",
-        "0003" => "Title 3",
+        "0009T" => "9 Toets Rekenen met schaal",
+        "0035T" => "35 Toets Gewervelde dieren",
+        "0086T" => "86 Toets Tafels van 11, 12 en 25",
         "0004" => "Title 4",
         "0005" => "Title 5"
 );
@@ -26,7 +26,7 @@ $show_hide = array("Toetsen");
 $users = array(
 
         //////////////////////////////////////////////////////////////////
-    'First name Last Name' => array(
+    'Yukihiro Matsumoto' => array(
             "Leerroute met eenheden" => array(
                 true, // 0001
                 true, // 0002
@@ -59,7 +59,7 @@ $users = array(
         //////////////////////////////////////////////////////////////////
         
         //////////////////////////////////////////////////////////////////
-        'First name Last Name8' => array(
+        'John McCarthy' => array(
                 "Leerroute met eenheden" => array(
                         true, // 0001
                         true, // 0002
@@ -91,7 +91,7 @@ $users = array(
         ),
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
-    'First name Last Name9' => array(
+    'Edsger Dijkstra' => array(
             "Leerroute met eenheden" => array(
                 true, // 0001
                 true, // 0002
@@ -123,7 +123,7 @@ $users = array(
         ),
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
-    'First name Last Name7' => array(
+    'Guido van Rossum' => array(
             "Leerroute met eenheden" => array(
                 true, // 0001
                 true, // 0002
@@ -155,7 +155,7 @@ $users = array(
         ),
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
-    'First name Last Name6' => array(
+    'Ada Lovelace' => array(
             "Leerroute met eenheden" => array(
                 true, // 0001
                 true, // 0002
@@ -187,7 +187,7 @@ $users = array(
         ),
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
-    'First name Last Name5' => array(
+    'Charles Babbage' => array(
             "Leerroute met eenheden" => array(
                 true, // 0001
                 true, // 0002
@@ -219,7 +219,7 @@ $users = array(
         ),
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
-    'First name Last Name4' => array(
+    'Alan Turing' => array(
             "Leerroute met eenheden" => array(
                 true, // 0001
                 true, // 0002
@@ -251,7 +251,7 @@ $users = array(
         ),
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
-    'First name Last Name3' => array(
+    'John von Neumann' => array(
             "Leerroute met eenheden" => array(
                 true, // 0001
                 true, // 0002
