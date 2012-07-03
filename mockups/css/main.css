@@ -1,0 +1,44 @@
+body
+{
+    margin: 0 auto;
+    padding: 0 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #555;
+}
+table
+{
+    border: 0;
+    padding: 0;
+    margin: 0 0 20px 0;
+    border-collapse: collapse;
+}
+th
+{
+    padding: 5px; /* NOTE: th padding must be set explicitly in order to support IE */
+    /*text-align: right;*/
+    font-weight:bold;
+    line-height: 2em;
+    color: #FFF;
+    background-color: #555;
+}
+tbody td
+{
+    padding: 10px;
+    line-height: 18px;
+    border-top: 1px solid #E0E0E0;
+}
+tbody tr:nth-child(2n)
+{
+    background-color: #F7F7F7;
+}
+tbody tr:hover
+{
+    background-color: #EEEEEE;
+}
+td
+{
+}
+td:first-child, th:first-child
+{
+}
