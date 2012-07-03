@@ -42,3 +42,15 @@ td
 td:first-child, th:first-child
 {
 }
+
+.icon-red {
+    background-image: url("../img/glyphicons-halflings-red.png");
+}
+
+.icon-green {
+    background-image: url("../img/glyphicons-halflings-green.png");
+}
+
+.icon-yellow {
+    background-image: url("../img/glyphicons-halflings-yellow.png");
+}

@@ -1,11 +1,17 @@
 $(function(){
     $('.toggler').live('click', function(e) {
-        if (this.innerHTML == 'All ') {
-            this.className = 'btn toggler';
-            this.innerHTML = 'None';
+        if (this.innerHTML == '<i class="icon icon-ok icon-green"></i>') {
+            this.innerHTML = '<i class="icon icon-remove icon-red"></i>';
         } else { // None and Part cases
-            this.className = 'btn toggler btn-success';
-            this.innerHTML = 'All ';
+            this.innerHTML = '<i class="icon icon-ok icon-green"></i>';
+        }
+    });
+    $('.toggler').tooltip();
+    $('.global-toggler').live('click', function(e) {
+        if (this.innerHTML == '<i class="icon icon-ok icon-white"></i>') {
+            this.innerHTML = '<i class="icon icon-remove icon-white"></i>';
+        } else { // None and Part cases
+            this.innerHTML = '<i class="icon icon-ok icon-white"></i>';
         }
     });
 
@@ -14,13 +20,13 @@ $(function(){
             // Subform is open, close
             this.className = 'show-all';
             $('.sub.' + this.id).hide();
-            this.innerHTML = 'Show <i class="icon-arrow-right icon-white"></i>';
+            this.innerHTML = 'Toon <i class="icon-arrow-right icon-white"></i>';
         } else {
             // Subform is closed, open
             this.className = 'show-all open';
             $('.sub.' + this.id).show();
 
-            this.innerHTML = '<i class="icon-arrow-left icon-white"></i> Hide';
+            this.innerHTML = '<i class="icon-arrow-left icon-white"></i> Verberg';
         }
     });
 
