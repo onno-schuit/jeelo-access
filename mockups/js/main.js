@@ -6,7 +6,7 @@ $(function(){
             this.innerHTML = '<i class="icon icon-ok icon-green"></i>';
         }
     });
-    $('.toggler').tooltip();
+    $('.sub').tooltip();
     $('.global-toggler').live('click', function(e) {
         if (this.innerHTML == '<i class="icon icon-ok icon-white"></i>') {
             this.innerHTML = '<i class="icon icon-remove icon-white"></i>';

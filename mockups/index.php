@@ -11,6 +11,14 @@ $classes = array(
 
 $sub_columns = array("0001", "0002", "0003", "0004", "0005");
 
+$sub_column_titles = array(
+        "0001" => "Title 1",
+        "0002" => "Title 2",
+        "0003" => "Title 3",
+        "0004" => "Title 4",
+        "0005" => "Title 5"
+);
+
 $shown_subs = array("Toetsen");
 
 $show_hide = array("Toetsen");
@@ -391,6 +399,7 @@ function get_status($column, $sub_column, $sub_columns) {
           <thead>
               <tr>
                   <th width="200px">Person</th>
+                  <th width="50px;">&nbsp;</th>
                   <?php
                   foreach ($columns as $column) {
                       $show = in_array($column, $shown_subs);
@@ -435,8 +444,8 @@ function get_status($column, $sub_column, $sub_columns) {
               <?php foreach ($users as $name=>$data) {?>
               <!---------- row ----------------------------------------------->
               <tr>
-                  <td><?php echo $name; ?>
-                      
+                  <td><?php echo $name; ?></td>
+                  <td>
                       <button class="btn btn-info">
                           <i class="icon icon-ok icon-white"></i>
                       </button>
@@ -453,8 +462,9 @@ function get_status($column, $sub_column, $sub_columns) {
 
                   <?php foreach ($sub_columns as $sub_column) {?>
                   <!--  subcol -->
-                  <td class="sub <?php echo $class;?>" <?php if (!$show) {?>style="display: none" <?php } ?>>
-                      <a href="#" class="toggler" data-original-title="<?php echo $sub_column; ?>">
+                  <td class="sub <?php echo $class;?>" <?php if (!$show) {?>style="display: none" <?php } ?> data-original-title="<?php echo $sub_column_titles[$sub_column]; ?>">
+                      <?php echo $sub_column; ?>
+                      <a href="#" class="toggler">
                       <i class="icon icon-<?php  echo get_status($data[$column], $sub_column, $sub_columns);?>"></i></a>
                   </td>
                   <!-- subcol eof -->
