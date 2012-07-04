@@ -55,3 +55,7 @@ td:first-child, th:first-child
 .icon-yellow {
     background-image: url("../img/glyphicons-halflings-yellow.png");
 }
+
+.btn-primary {
+    margin-bottom: 5px;
+}

@@ -9,12 +9,12 @@ $classes = array(
         "Films" => "films",
         "Toetsen" => "quizzes");
 
-$sub_columns = array("0009T", "0035T", "0086T", "0004", "0005");
+$sub_columns = array("0009", "0035", "0086", "0004", "0005");
 
 $sub_column_titles = array(
-        "0009T" => "9 Toets Rekenen met schaal",
-        "0035T" => "35 Toets Gewervelde dieren",
-        "0086T" => "86 Toets Tafels van 11, 12 en 25",
+        "0009" => "9 Toets Rekenen met schaal",
+        "0035" => "35 Toets Gewervelde dieren",
+        "0086" => "86 Toets Tafels van 11, 12 en 25",
         "0004" => "Title 4",
         "0005" => "Title 5"
 );
@@ -398,26 +398,31 @@ function get_status($column, $sub_column, $sub_columns) {
       <table>
           <thead>
               <tr>
-                  <th width="200px">Person</th>
+                  <th width="200px">Leerlingen</th>
                   <th width="50px;">&nbsp;</th>
                   <?php
                   foreach ($columns as $column) {
                       $show = in_array($column, $shown_subs);
                       $class = $classes[$column];
                       ?>
-                      <th><?php echo $column; ?><br />
-                      <?php if (in_array($column, $show_hide)) {?>
-                          <?php if (!$show) {?>
-                          <a href="#" id="<?php echo $class; ?>" class="show-all" style="color: white">
-                          Toon
-                          <i class="icon-arrow-right icon-white"></i>
-                          <?php } else {?>
-                          <a href="#" style="color: white" id="<?php echo $class; ?>" class="show-all open">
-                              <i class="icon-arrow-left icon-white"></i>
-                              Verberg
-                          <?php } ?>
-                      <?php }?>
-                      </a><br />
+                      <th width="80px">
+                        <div>
+                            <div style="height:40px;overflow:hidden;"><?php echo $column; ?></div>
+                            <div style="height:20px;">
+                          <?php if (in_array($column, $show_hide)) {?>
+                              <?php if (!$show) {?>
+                              <a href="#" id="<?php echo $class; ?>" class="show-all" style="color: white">
+                              Toon
+                                  <i class="icon-arrow-right icon-white"></i>
+                                  <?php } else {?>
+                                  <a href="#" style="color: white" id="<?php echo $class; ?>" class="show-all open">
+                                      <i class="icon-arrow-left icon-white"></i>
+                                      Verberg
+                                  <?php } ?>
+                              <?php }?>
+                              </a>
+                            </div>
+                      </div>
                       <button class="btn btn-primary">
                           <i class="icon icon-ok icon-white"></i>
                       </button>
@@ -426,9 +431,12 @@ function get_status($column, $sub_column, $sub_columns) {
 
                       foreach ($sub_columns as $sub_column) {
                           ?>
-                  <th class="sub <?php echo $class;?>" <?php if (!$show) {?>style="display: none"<?php }?>>&nbsp;<br />
-                      <?php echo $sub_column; ?><br />
-                      
+                  <th class="sub <?php echo $class;?>" <?php if (!$show) {?>style="display: none"<?php }?>>
+                      <div style="height:40px;"></div>
+                      <div style="height:20px;">
+                          <?php echo $sub_column; ?>
+                      </div>
+                    
                       <button class="btn btn-primary">
                           <i class="icon icon-ok icon-white"></i>
                       </button>
