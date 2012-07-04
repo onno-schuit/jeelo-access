@@ -423,7 +423,7 @@ function get_status($column, $sub_column, $sub_columns) {
                               </a>
                             </div>
                       </div>
-                      <button class="btn btn-primary">
+                      <button class="btn btn-warning">
                           <i class="icon icon-ok icon-white"></i>
                       </button>
                       </th>
@@ -433,11 +433,11 @@ function get_status($column, $sub_column, $sub_columns) {
                           ?>
                   <th class="sub <?php echo $class;?>" <?php if (!$show) {?>style="display: none"<?php }?>>
                       <div style="height:40px;"></div>
-                      <div style="height:20px;">
+                      <div style="height:20px;" class="tip" data-original-title="<?php echo $sub_column_titles[$sub_column]; ?>">
                           <?php echo $sub_column; ?>
                       </div>
                     
-                      <button class="btn btn-primary">
+                      <button class="btn btn-warning tip" data-original-title="<?php echo $sub_column_titles[$sub_column]; ?>">
                           <i class="icon icon-ok icon-white"></i>
                       </button>
                   </th>
@@ -454,7 +454,7 @@ function get_status($column, $sub_column, $sub_columns) {
               <tr>
                   <td><?php echo $name; ?></td>
                   <td>
-                      <button class="btn btn-info">
+                      <button class="btn btn-warning">
                           <i class="icon icon-ok icon-white"></i>
                       </button>
                       
@@ -470,7 +470,7 @@ function get_status($column, $sub_column, $sub_columns) {
 
                   <?php foreach ($sub_columns as $sub_column) {?>
                   <!--  subcol -->
-                  <td class="sub <?php echo $class;?>" <?php if (!$show) {?>style="display: none" <?php } ?> data-original-title="<?php echo $sub_column_titles[$sub_column]; ?>">
+                  <td class="sub <?php echo $class;?>" <?php if (!$show) {?>style="display: none" <?php } ?>>
                       <?php echo $sub_column; ?>
                       <a href="#" class="toggler">
                       <i class="icon icon-<?php  echo get_status($data[$column], $sub_column, $sub_columns);?>"></i></a>
