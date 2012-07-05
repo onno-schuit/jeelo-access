@@ -1,10 +1,10 @@
 <?php
 
 
-$columns = array("Leerroute met eenheden", "Wiki's", "Films", "Toetsen");
+$columns = array("Leerroute", "Wiki's", "Films", "Toetsen");
 
 $classes = array(
-        "Leerroute met eenheden" => "topics",
+        "Leerroute" => "topics",
         "Wiki's" => "wiki",
         "Films" => "films",
         "Toetsen" => "quizzes");
@@ -27,7 +27,7 @@ $users = array(
 
         //////////////////////////////////////////////////////////////////
     'Yukihiro Matsumoto' => array(
-            "Leerroute met eenheden" => array(
+            "Leerroute" => array(
                 true, // 0001
                 true, // 0002
                 true, // 0003
@@ -60,7 +60,7 @@ $users = array(
         
         //////////////////////////////////////////////////////////////////
         'John McCarthy' => array(
-                "Leerroute met eenheden" => array(
+                "Leerroute" => array(
                         true, // 0001
                         true, // 0002
                         true, // 0003
@@ -92,7 +92,7 @@ $users = array(
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
     'Edsger Dijkstra' => array(
-            "Leerroute met eenheden" => array(
+            "Leerroute" => array(
                 true, // 0001
                 true, // 0002
                 true, // 0003
@@ -124,7 +124,7 @@ $users = array(
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
     'Guido van Rossum' => array(
-            "Leerroute met eenheden" => array(
+            "Leerroute" => array(
                 true, // 0001
                 true, // 0002
                 true, // 0003
@@ -156,7 +156,7 @@ $users = array(
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
     'Ada Lovelace' => array(
-            "Leerroute met eenheden" => array(
+            "Leerroute" => array(
                 true, // 0001
                 true, // 0002
                 true, // 0003
@@ -188,7 +188,7 @@ $users = array(
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
     'Charles Babbage' => array(
-            "Leerroute met eenheden" => array(
+            "Leerroute" => array(
                 true, // 0001
                 true, // 0002
                 true, // 0003
@@ -220,7 +220,7 @@ $users = array(
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
     'Alan Turing' => array(
-            "Leerroute met eenheden" => array(
+            "Leerroute" => array(
                 true, // 0001
                 true, // 0002
                 true, // 0003
@@ -252,7 +252,7 @@ $users = array(
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
     'John von Neumann' => array(
-            "Leerroute met eenheden" => array(
+            "Leerroute" => array(
                 true, // 0001
                 true, // 0002
                 true, // 0003
@@ -284,7 +284,7 @@ $users = array(
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
     'First name Last Name2' => array(
-            "Leerroute met eenheden" => array(
+            "Leerroute" => array(
                 true, // 0001
                 true, // 0002
                 true, // 0003
@@ -316,7 +316,7 @@ $users = array(
         //////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////
     'First name Last Name1' => array(
-            "Leerroute met eenheden" => array(
+            "Leerroute" => array(
                 true, // 0001
                 true, // 0002
                 true, // 0003
@@ -398,7 +398,10 @@ function get_status($column, $sub_column, $sub_columns) {
       <table>
           <thead>
               <tr>
-                  <th width="200px">Leerlingen</th>
+                  <th width="200px" style="padding-left: 10px">
+                    <div style="height:55px;"></div>
+                    Leerlingen
+                  </th>
                   <th width="50px;">&nbsp;</th>
                   <?php
                   foreach ($columns as $column) {
@@ -465,14 +468,13 @@ function get_status($column, $sub_column, $sub_columns) {
                   $class = $classes[$column];
               ?>
                   <td>
-                      <a href="#" class="toggler" data-original-title="<?php echo $column; ?>"><i class="icon icon-<?php echo get_status_column($data[$column]); ?>"></i></a>
+                      <a href="#" class="toggler" data-original-title="<?php echo $column; ?>" style="margin-left: 5px;"><i class="icon icon-<?php echo get_status_column($data[$column]); ?>"></i></a>
                   </td>
 
                   <?php foreach ($sub_columns as $sub_column) {?>
                   <!--  subcol -->
                   <td class="sub <?php echo $class;?>" <?php if (!$show) {?>style="display: none" <?php } ?>>
-                      <?php echo $sub_column; ?>
-                      <a href="#" class="toggler">
+                      <a href="#" class="toggler" style="margin-left: 5px;">
                       <i class="icon icon-<?php  echo get_status($data[$column], $sub_column, $sub_columns);?>"></i></a>
                   </td>
                   <!-- subcol eof -->

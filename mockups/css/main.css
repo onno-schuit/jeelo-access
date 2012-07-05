@@ -16,7 +16,7 @@ table
 th
 {
     padding: 5px; /* NOTE: th padding must be set explicitly in order to support IE */
-    /*text-align: right;*/
+    text-align: middle;
     font-weight:bold;
     line-height: 2em;
     text-align: left;
