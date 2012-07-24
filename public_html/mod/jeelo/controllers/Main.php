@@ -90,6 +90,8 @@ class Main extends Soda2_Controller {
   public function course($id) {
     $this->course_id = $id;
 
+    $this->_get_context();
+
     $mod_data = $this->_get_mods($id);
     $my_mods = $mod_data[0];
     $plural_mods = $mod_data[1];
@@ -314,6 +316,15 @@ class Main extends Soda2_Controller {
     }
 
     return array($my_mods, $plural_mods);
+  }
+
+  private function _get_context() {
+    // Collect context params
+    $module = $this->db->sql(sprintf("SELECT cm.id
+    FROM {modules} m, {course_modules} cm
+    WHERE cm.module = m.id AND cm.course = %s AND m.name = 'jeelo'", $this->course_id), true);
+
+    $this->_context = get_context_instance(CONTEXT_MODULE, $module['id']);
   }
 
   private function _mod_settings($key, $default=false) {

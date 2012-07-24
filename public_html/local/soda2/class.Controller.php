@@ -29,6 +29,8 @@ class Soda2_Controller {
      * Private $json boolean - convert outpout into json flag
      */
     $this->json = false;
+
+    $this->_context = null;
   }
 
   public function setView($view) {
@@ -101,15 +103,20 @@ class Soda2_Controller {
     } else {
       global $OUTPUT, $PAGE;
 
+      if (!is_null($this->_context)) {
+	$PAGE->set_context(null);//$this->_context);
+      }
+
       $class = get_class($this);
       $PAGE->set_url('/mod/' . $this->module . '/index.php');
+      $PAGE->set_heading('Jeelo');
       $PAGE->set_pagelayout('incourse');
       
       $strplural = get_string("modulenameplural", $this->module);
-      $PAGE->navbar->add($strplural);
+      //      $PAGE->navbar->add($strplural);
       $PAGE->set_title($strplural);
 
-      $PAGE->set_context('');
+
       echo $OUTPUT->header();
       echo $OUTPUT->heading(get_string('modulenameplural', 'jeelo'), 2);
 
