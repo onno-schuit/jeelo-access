@@ -1,0 +1,3 @@
+[submodule "public_html/local/soda"]
+	path = public_html/local/soda
+	url = git://github.com/onno-schuit/soda.git
