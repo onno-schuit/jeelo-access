@@ -23,10 +23,12 @@ var COURSE_ID = '{$course_id}';
 	<div>
           <div style="height:40px;overflow:hidden;">{$value.plural}</div>
           <div style="height:20px;">
+	    {if="in_array($key, $expanded)"}
 	    <a href="#" style="color: white" id="{$key}" class="show-all open">
               <i class="icon-arrow-left icon-white"></i>
               Verberg
             </a>
+	    {/if}
           </div>
         </div>
         <button class="btn btn-warning group-toggler" type="{$key}">
@@ -34,7 +36,7 @@ var COURSE_ID = '{$course_id}';
         </button>
       </th>
       {loop="$value.instances"}
-      <th class="sub {$key1}">
+      <th class="sub {$key1}"{function="visibility($key1, $expanded)"}>
 	<div style="height:40px;"></div>
         <div style="height:20px;" class="tip" data-original-title="{function="mod_name_plural($plural_mods, $key1, $value2)"}">
           {$value2} 
@@ -66,7 +68,7 @@ var COURSE_ID = '{$course_id}';
       </td>
       {loop="value2"}
         <!--  subcol -->
-        <td class="sub {$key2}">
+        <td class="sub {$key2}"{function="visibility($key2, $expanded)"}>
           <a href="javascript:void(0);" gid="{$key3}" status="{$value3}" type="{$key2}" class="toggler" user="{$value1.user.id}" style="margin-left: 5px;"><i class='icon icon-{function="get_status($value3)"}'></i></a>
         </td>
         <!-- subcol eof -->

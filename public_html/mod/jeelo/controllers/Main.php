@@ -43,6 +43,19 @@ function get_status_column($column, $id_only=false) {
     return $str;
 }
 
+function visibility($key, $expanded) {
+  $visible = true;
+  if (!in_array($key, $expanded)) {
+    $visible = false;
+  }
+
+  if (!$visible) {
+    return ' style="display:none"';
+  } else {
+    return '';
+  }
+}
+
 function mod_name_plural($mods, $key, $value) {
   return $mods[$key][$value];
 }
@@ -75,11 +88,15 @@ class Main extends Soda2_Controller {
   }
 
   public function course($id) {
+    $this->course_id = $id;
+
     $mod_data = $this->_get_mods($id);
     $my_mods = $mod_data[0];
     $plural_mods = $mod_data[1];
 
     $default = $this->_mod_settings('access', 0); // defaults to false
+
+    $this->set('expanded', explode(',', $this->_mod_settings('expanded', 'quiz')));
 
     $users = $this->db->sql("SELECT id, lastname, firstname FROM {user} ORDER BY lastname ASC");
 
@@ -285,6 +302,9 @@ class Main extends Soda2_Controller {
     $plural_mods = array();
 
     foreach ($mods as $mod) {
+      if ($mod->modname == 'jeelo') {
+	continue;
+      }
       if (!array_key_exists($mod->modname, $my_mods)) {
 	$my_mods[$mod->modname] = array('instances'=>array(), 'plural'=>$mod->modplural);
 	$plural_mods[$mod->modname] = array();
@@ -297,12 +317,23 @@ class Main extends Soda2_Controller {
   }
 
   private function _mod_settings($key, $default=false) {
-    $config = $this->db->sql(sprintf("SELECT * FROM {jeelo_access_defaults} WHERE key='%s'", $key), true);
+    $module = $this->db->sql(sprintf("SELECT j.access, j.expanded
+    FROM {jeelo} j, {modules} m, {course_modules} cm
+    WHERE j.id = cm.instance AND cm.module = m.id AND cm.course = %s AND m.name = 'jeelo'", $this->course_id), true);
 
-    if (is_null($config)) {
+    $param = null;
+    if (!is_null($module) && array_key_exists($key, $module)) {
+      $param = $module[$key];
+    }
+
+    if (is_null($param)) {
+        $param = $this->db->sql(sprintf("SELECT * FROM {jeelo_access_defaults} WHERE key='%s'", $key), true);
+    }
+
+    if (is_null($param)) {
       return $default;
     } else {
-      return $config;
+      return $param;
     }
   }
 }
