@@ -25,7 +25,7 @@
 
 
 defined('MOODLE_INTERNAL') || die();
-require_once($CFG->dirroot.'/course/format/renderer.php');
+@include_once($CFG->dirroot.'/course/format/renderer.php');
 
 /**
  * Basic renderer for topics format.
