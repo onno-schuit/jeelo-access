@@ -169,6 +169,18 @@ class Soda2 {
       $route = $this->routes[$this->url];
     } else {
       foreach ($this->routes as $key=>$rt) {
+        if (empty($key)) {
+          continue;
+        }
+        preg_match_all($key,
+                   $this->url,
+                   $matches,
+                   PREG_SET_ORDER);
+        if (count($matches)) {
+          foreach($matches[0] as $match=>$value) {
+            if (is_int($match)) {
+              continue;
+            }
 	if (empty($key)) {
 	  continue;
 	}
@@ -186,6 +198,10 @@ class Soda2 {
 	  }
 	  $route = $this->routes[$key];
 	}
+            $params[$match] = $value;
+          }
+          $route = $this->routes[$key];
+        }
       }
       // Some black magic here
     }
