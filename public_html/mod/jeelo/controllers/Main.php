@@ -181,14 +181,19 @@ class Main extends Soda2_Controller {
     if ($this->request->post('userid', false)) {
       $user = $this->db->record('user', array('id'=>$this->request->post('userid')));
       
-      $quizzes = $this->db->sql(sprintf("SELECT id,name FROM {quiz} WHERE course = %s", $id));
-      
-      foreach($quizzes as $quiz) {
-        $this->_save_access('quiz',
-                            $quiz['id'],
-                            $this->request->post('userid'),
-                            1);
+      $mods = $this->_get_mods($id);
+
+      $data = $mods[0];
+      foreach($mods[0] as $key=>$mod) {
+	foreach($mod['instances'] as $instance) {
+	  $this->_save_access($key,
+			      $instance,
+			      $this->request->post('userid'),
+			      1);
+
+	}
       }
+
       return array('status'=>'ok');
     }
 
@@ -311,7 +316,8 @@ class Main extends Soda2_Controller {
 	$my_mods[$mod->modname] = array('instances'=>array(), 'plural'=>$mod->modplural);
 	$plural_mods[$mod->modname] = array();
       }
-      $my_mods[$mod->modname]['instances'][] = $mod->instance;
+
+      $my_mods[$mod->modname]['instances'][] = $mod->id;
       $plural_mods[$mod->modname][$mod->instance] = $mod->name;
     }
 
