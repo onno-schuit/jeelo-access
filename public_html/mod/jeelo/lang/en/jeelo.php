@@ -28,4 +28,4 @@ $string['jeelo:viewrating'] = 'View ratings of own posts';
 $string['jeelo:viewsubscribers'] = 'View subscribers';
 $string['jeelo:copydiscussion'] = 'Copy discussion';
 $string['jeelo:forwardposts'] = 'Forward posts';
-?>
+
