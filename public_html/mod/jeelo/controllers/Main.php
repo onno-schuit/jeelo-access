@@ -63,6 +63,17 @@ class Main extends Soda2_Controller {
     $this->set('settings_heading', 'Settings');
   }
 
+  public function course_view($id) {
+    $instance = $this->db->sql(sprintf("SELECT course FROM {course_modules} WHERE id = '%s'", $id), true);
+    if (!is_null($instance)) {
+      $this->raw = true;
+      $out = '<script type="text/javascript">window.location.href="' .$this->base_url . '/mod/jeelo/?/course/' . $instance['course'] . '/";</script>';
+
+      return $out;
+    }
+    die($id);
+  }
+
   public function course($id) {
     $mod_data = $this->_get_mods($id);
     $my_mods = $mod_data[0];

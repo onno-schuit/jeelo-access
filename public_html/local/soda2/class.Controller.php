@@ -69,7 +69,8 @@ class Soda2_Controller {
     
     raintpl::configure( 'path_replace', false );
 
-    $this->set_global("base_url", (($_SERVER['HTTPS'] == 'on') ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']);
+    $this->base_url =  (($_SERVER['HTTPS'] == 'on') ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+    $this->set_global("base_url", $this->base_url);
 
     //initialize a Rain TPL object
     $this->tpl = new RainTPL();

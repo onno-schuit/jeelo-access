@@ -12,7 +12,7 @@ class Settings extends Soda2_Controller {
   public function index() {
 
     $settings = $this->db->sql("SELECT * FROM {jeelo_access_defaults}");
-    _dump($settings);
+
     $this->set('settings', $settings);
 
     if ($this->request->method == 'POST') {
