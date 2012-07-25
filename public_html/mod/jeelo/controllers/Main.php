@@ -318,7 +318,7 @@ class Main extends Soda2_Controller {
       }
 
       $my_mods[$mod->modname]['instances'][] = $mod->id;
-      $plural_mods[$mod->modname][$mod->instance] = $mod->name;
+      $plural_mods[$mod->modname][$mod->id] = $mod->name;
     }
 
     return array($my_mods, $plural_mods);

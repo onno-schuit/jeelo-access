@@ -12,6 +12,6 @@ function jeelo_check_permissions($userid, $modname, $modid) {
   }
 
   foreach($data as $rights) {
-    return ($rights->level) ? true : false;
+    return ($rights->level == 1) ? true : false;
   }
 }

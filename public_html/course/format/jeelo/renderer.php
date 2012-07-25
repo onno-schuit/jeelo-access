@@ -133,11 +133,11 @@ class format_jeelo_renderer extends format_section_renderer_base {
         if ($thissection->summary or $thissection->sequence or $PAGE->user_is_editing()) {
             echo $this->section_header($thissection, $course, true);
 	    global $CFG, $USER;	
-	    include_once(dirname(__FILE__) . '/../../../lib/jeelo_access.php');
+	    @include_once(dirname(__FILE__) . '/../../../lib/jeelo_access.php');
     
 	    $new_mods = array();
 	    foreach ($mods as $modid=>$mod) {
-	      $status = jeelo_check_permissions($USER->id, $mod->modname, $mod->instance);
+	      $status = jeelo_check_permissions($USER->id, $mod->modname, $mod->id);
 	      if (!$status) {
 		$mods[$modid]->visible = 0;
 	      }
