@@ -1,0 +1,13 @@
+<form action="" method="POST">
+  <table>
+  {loop="settings"}
+  <tr>
+    <th>{$value.key}:</th>
+    <td><input type="text" name="{$value.key}" value="{$value.value}" /></td>
+  </tr>
+  {/loop}
+  <tr>
+    <td>&nbsp;</td><td><input type="submit" value="Save" /> | <a href="/mod/jeelo/">Go back</a></td>
+  </tr>
+  </table>
+</form>
