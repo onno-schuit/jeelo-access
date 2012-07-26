@@ -105,12 +105,6 @@ class Main extends Soda2_Controller {
     $course = $this->db->record('course', array('id'=>$id));
     $this->set('course_id', $course['id']);
 
-    $quizzes = $this->db->sql(sprintf("SELECT id, name FROM {quiz} WHERE course = %s", $id));
-
-    $ids = array();
-    foreach ($quizzes as $id=>$quiz) {
-      $ids[] = $quiz['id'];
-    }
 
     $table = array();
     foreach($users as $user) {
@@ -144,8 +138,6 @@ class Main extends Soda2_Controller {
     }
 
     $this->set('table', $table);
-
-    $this->set('quizzes', $quizzes);
 
     $this->set('mods', $my_mods);
     $this->set('plural_mods', $plural_mods);

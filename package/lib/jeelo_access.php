@@ -7,6 +7,7 @@ function jeelo_check_permissions($userid, $modname, $modid) {
 			    $userid,
 			    $modname,
 			    $modid));
+  var_dump($data);
   if (!count($data)) {
     return false; // Default to false
   }

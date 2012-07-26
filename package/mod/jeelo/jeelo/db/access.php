@@ -49,7 +49,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
-    'mod/chat:addinstance' => array(
+    'mod/jeelo:addinstance' => array(
         'riskbitmask' => RISK_XSS,
 	'captype' => 'write',
 	'contextlevel' => CONTEXT_COURSE,
