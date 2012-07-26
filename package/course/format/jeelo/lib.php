@@ -57,6 +57,16 @@ function callback_topics_definition() {
     return get_string('topic');
 }
 
+/**
+ * The GET argument variable that is used to identify the section being
+ * viewed by the user (if there is one)
+ *
+ * @return string
+ */
+function callback_topics_request_key() {
+    return 'topic';
+}
+
 function callback_topics_get_section_name($course, $section) {
     // We can't add a node without any text
     if ((string)$section->name !== '') {
@@ -82,22 +92,12 @@ function callback_topics_ajax_support() {
 }
 
 /**
- * Callback function to do some action after section move
+ * Returns a URL to arrive directly at a section
  *
- * @param stdClass $course The course entry from DB
- * @return array This will be passed in ajax respose.
+ * @param int $courseid The id of the course to get the link for
+ * @param int $sectionnum The section number to jump to
+ * @return moodle_url
  */
-function callback_topics_ajax_section_move($course) {
-    global $COURSE, $PAGE;
-
-    $titles = array();
-    rebuild_course_cache($course->id);
-    $modinfo = get_fast_modinfo($COURSE);
-    $renderer = $PAGE->get_renderer('format_topics');
-    if ($renderer && ($sections = $modinfo->get_section_info_all())) {
-        foreach ($sections as $number => $section) {
-            $titles[$number] = $renderer->section_title($section, $course);
-        }
-    }
-    return array('sectiontitles' => $titles, 'action' => 'move');
+function callback_topics_get_section_url($courseid, $sectionnum) {
+    return new moodle_url('/course/view.php', array('id' => $courseid, 'topic' => $sectionnum));
 }

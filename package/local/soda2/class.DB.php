@@ -44,6 +44,18 @@ class Soda2_DB {
     return $result;
   }
 
+  function update($table, $array) {
+    $data = (object)$array;
+
+    $this->db->update_record($table, $data);
+  }
+
+  function insert($table, $array) {
+    $data = (object)$array;
+
+    return $this->db->insert_record($table, $array);
+  }
+
   function record($table, $params) {
     return objectToArray($this->db->get_record($table, $params));
   }
