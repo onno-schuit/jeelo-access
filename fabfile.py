@@ -10,7 +10,7 @@ def update():
     collect()
     local('git pull')
     for path in files:
-        local('cp -rfu package/%s public_html/%s' % (path, path))
+        local('cp -rf package/%s public_html/%s' % (path, path))
 
 def pack():
     collect()
@@ -19,4 +19,4 @@ def pack():
 
 def collect():
     for path in files:
-        local('cp -rfu public_html/%s package/%s' % (path, path)) 
+        local('cp -rf public_html/%s package/%s' % (path, path)) 
