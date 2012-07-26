@@ -6,6 +6,12 @@ files = ['local/soda2',
          'mod/jeelo',
          'course/format/jeelo']
 
+def update():
+    collect()
+    local('git pull')
+    for path in files:
+        local('cp -rfu package/%s public_html/%s' % (path, path))
+
 def pack():
     collect()
     local('tar -cz package > package.tar.gz')
