@@ -84,7 +84,7 @@ class Main extends Soda2_Controller {
 
       return $out;
     }
-    die($id);
+    die();
   }
 
   public function course($id) {
@@ -100,7 +100,12 @@ class Main extends Soda2_Controller {
 
     $this->set('expanded', explode(',', $this->_mod_settings('expanded', 'quiz')));
 
-    $users = $this->db->sql("SELECT id, lastname, firstname FROM {user} ORDER BY lastname ASC");
+    $contextid = get_context_instance(CONTEXT_COURSE, $id);
+
+    $ssql = "SELECT u.id, u.username, u.lastname, u.firstname
+FROM {user} u, {role_assignments} r
+WHERE u.id=r.userid AND r.contextid = {$contextid->id}";
+    $users = $this->db->sql($ssql);
 
     $course = $this->db->record('course', array('id'=>$id));
     $this->set('course_id', $course['id']);
