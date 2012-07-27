@@ -100,46 +100,43 @@ class Main extends Soda2_Controller {
 
     $this->set('expanded', explode(',', $this->_mod_settings('expanded', 'quiz')));
 
-    $contextid = get_context_instance(CONTEXT_COURSE, $id);
-
-    $ssql = "SELECT u.id, u.username, u.lastname, u.firstname
-FROM {user} u, {role_assignments} r
-WHERE u.id=r.userid AND r.contextid = {$contextid->id}";
-    $users = $this->db->sql($ssql);
+    $users = $this->_get_users($id);
 
     $course = $this->db->record('course', array('id'=>$id));
     $this->set('course_id', $course['id']);
 
 
     $table = array();
-    foreach($users as $user) {
-      $_user = array('user'=>$user, 'mods'=>array());
+    if (count($users) > 0) {
+      foreach($users as $user) {
+	$_user = array('user'=>$user, 'mods'=>array());
+	
+	foreach($my_mods as $modname=>$mod) {
+	  if (!array_key_exists($modname, $_user['mods'])) {
+	    $_user['mods'][$modname] = array();
+	  }
 
-      foreach($my_mods as $modname=>$mod) {
-	if (!array_key_exists($modname, $_user['mods'])) {
-	  $_user['mods'][$modname] = array();
-	}
-
-	$access = $this->db->sql(sprintf("SELECT activity, level FROM {jeelo_access}
+	  $access = $this->db->sql(sprintf("SELECT activity, level FROM {jeelo_access}
                                         WHERE type = '%s'
                                             AND activity IN (%s)
                                             AND userid = '%s'",
-					 $modname,
-					 implode(',', $mod['instances']),
-					 $user['id']));
+					   $modname,
+					   implode(',', $mod['instances']),
+					   $user['id']));
 
-	foreach($mod['instances'] as $instance) {
-	  if (!is_null($access) && array_key_exists($instance, $access)) {
-	    $_user['mods'][$modname][$instance] = $access[$instance]['level'];
-	  } else {
-	    // Use defaults
-	    $_user['mods'][$modname][$instance] = $default;
+	  foreach($mod['instances'] as $instance) {
+	    if (!is_null($access) && array_key_exists($instance, $access)) {
+	      $_user['mods'][$modname][$instance] = $access[$instance]['level'];
+	    } else {
+	      // Use defaults
+	      $_user['mods'][$modname][$instance] = $default;
+	    }
 	  }
+	  
 	}
-
-      }
-
-      $table[] = $_user;
+	
+	$table[] = $_user;
+    }
     }
 
     $this->set('table', $table);
@@ -338,18 +335,26 @@ WHERE u.id=r.userid AND r.contextid = {$contextid->id}";
     $this->_context = get_context_instance(CONTEXT_MODULE, $module['id']);
   }
 
+  private function _get_users($id) {
+    $contextid = get_context_instance(CONTEXT_COURSE, $id);
+
+    $ssql = "SELECT u.id, u.username, u.lastname, u.firstname
+FROM {user} u, {role_assignments} r
+WHERE u.id=r.userid AND r.contextid = {$contextid->id}";
+    $users = $this->db->sql($ssql);
+    return $users;
+  }
+
   private function _mod_settings($key, $default=false) {
     $module = $this->db->sql(sprintf("SELECT j.access, j.expanded
     FROM {jeelo} j, {modules} m, {course_modules} cm
     WHERE j.id = cm.instance AND cm.module = m.id AND cm.course = %s AND m.name = 'jeelo'", $this->course_id), true);
 
     $param = null;
-    if (!is_null($module) && array_key_exists($key, $module)) {
+    if (!is_null($module)) {
+      if (array_key_exists($key, $module)) {
       $param = $module[$key];
-    }
-
-    if (is_null($param)) {
-        $param = $this->db->sql(sprintf("SELECT * FROM {jeelo_access_defaults} WHERE key='%s'", $key), true);
+      }
     }
 
     if (is_null($param)) {
