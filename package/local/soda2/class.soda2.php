@@ -88,7 +88,7 @@ class Soda2 {
 
     $this->url = '';
     if (count($_temp) > 1) {
-      $this->url = $_temp[2];
+      $this->url = $_temp[1];
     }
 
     // Main controllers directory setting
