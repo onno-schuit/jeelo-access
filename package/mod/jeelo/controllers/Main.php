@@ -143,6 +143,7 @@ class Main extends Soda2_Controller {
 
     $this->set('mods', $my_mods);
     $this->set('plural_mods', $plural_mods);
+    $this->set('root_url', $this->base_url);
   }
 
   public function save_one($id) {

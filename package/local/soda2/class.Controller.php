@@ -73,7 +73,7 @@ class Soda2_Controller {
 
     $this->base_url =  $CFG->wwwroot;
 
-    $this->set_global("base_url", $this->base_url);
+    $this->set_global("root_url", $this->base_url);
 
     //initialize a Rain TPL object
     $this->tpl = new RainTPL();

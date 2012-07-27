@@ -76,13 +76,6 @@ class Soda2 {
     $this->_config = new Soda2_Config($config);
     $this->_config_cache = array();
 
-    // Url strip, used to strip extra parameters from url
-    $this->urlstrip = $this->config('urlstrip', '');  // Empty by default
-
-    // Define main url
-    $_url = substr($this->config('url', $_SERVER['REQUEST_URI']),
-		   strlen($this->urlstrip));
-    $this->url = $_url ? $_url : '';
     // TODO:::
     $_temp = explode('?', $_SERVER['REQUEST_URI']);
 
