@@ -83,6 +83,13 @@ class Soda2 {
     $_url = substr($this->config('url', $_SERVER['REQUEST_URI']),
 		   strlen($this->urlstrip));
     $this->url = $_url ? $_url : '';
+    // TODO:::
+    $_temp = explode('?', $_SERVER['REQUEST_URI']);
+
+    $this->url = '';
+    if (count($_temp) > 1) {
+      $this->url = $_temp[2];
+    }
 
     // Main controllers directory setting
     $this->controllers_dir = $this->config('controllers', 'controllers');
