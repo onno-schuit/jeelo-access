@@ -25,4 +25,6 @@ def collect():
         if not '.' in path:
             local('mkdir -p package/%s' % path)
 
-        local('cp -rf public_html/%s%s package/%s' % (path, '/' if not '.' in path else '', '/'.join(path.split('/')[0:-1])))
+        local('cp -rf public_html/%s package/%s' % (path,
+                                                    #'/' if not '.' in path else '',
+                                                    '/'.join(path.split('/')[0:-1])))
