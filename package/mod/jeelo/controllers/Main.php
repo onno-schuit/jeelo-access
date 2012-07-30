@@ -92,13 +92,6 @@ class Main extends Soda2_Controller {
   public function course($id) {
     $context = get_context_instance(CONTEXT_COURSE, $id);
 
-    if (!has_capability('moodle/legacy:admin', $context, $USER->id, false)) {
-      $this->raw = true;
-      $out = '<script type="text/javascript">window.location.href="' .$this->base_url . '/mod/jeelo/?/course/' . $instance['course'] . '/";</script>';
-
-      return $out;
-    }
-
     $this->course_id = $id;
 
     $this->_get_context();
