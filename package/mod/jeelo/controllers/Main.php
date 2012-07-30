@@ -67,7 +67,7 @@ class Main extends Soda2_Controller {
   }
 
   public function index() {
-    $courses = $this->db->sql("SELECT * FROM {course} WHERE id != 1 ORDER BY id ASC");
+    $courses = $this->db->sql("SELECT * FROM {course} WHERE id != 1 AND format = 'jeelo' ORDER BY id ASC");
 
     $this->set('heading', 'Courses');
 
