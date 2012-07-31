@@ -25,15 +25,15 @@
 
     <TABLE NAME="jeelo_access_defaults" COMMENT="Access default settings" PREVIOUS="jeelo_access" NEXT="jeelo">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="key"/>
-        <FIELD NAME="key" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="value"/>
-	<FIELD NAME="value" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="key"/>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="config"/>
+        <FIELD NAME="config" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="data"/>
+	<FIELD NAME="data" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="config"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
       <INDEXES>
-        <INDEX NAME="key" UNIQUE="true" FIELDS="key"/>
+        <INDEX NAME="config" UNIQUE="true" FIELDS="config"/>
       </INDEXES>
     </TABLE>
 

@@ -53,7 +53,7 @@ class Soda2_DB {
   function insert($table, $array) {
     $data = (object)$array;
 
-    return $this->db->insert_record($table, $array);
+    return $this->db->insert_record($table, $data);
   }
 
   function record($table, $params) {

@@ -1,9 +1,10 @@
+<span>Note: leave empty to use defaults</span>
 <form action="" method="POST">
   <table>
   {loop="settings"}
   <tr>
-    <th>{$value.key}:</th>
-    <td><input type="text" name="{$value.key}" value="{$value.value}" /></td>
+    <th>{$key}:</th>
+    <td><input type="text" name="{$key}" value="{$value}" /></td>
   </tr>
   {/loop}
   <tr>

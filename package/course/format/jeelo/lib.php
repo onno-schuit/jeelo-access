@@ -29,7 +29,7 @@
  *
  * @return bool Returns true
  */
-function callback_jeelo_uses_sections() {
+function callback_topics_uses_sections() {
     return true;
 }
 
@@ -43,8 +43,8 @@ function callback_jeelo_uses_sections() {
  * @param stdClass $modinfo The mod info object for the current course
  * @return bool Returns true
  */
-function callback_jeelo_load_content(&$navigation, $course, $coursenode) {
-    return $navigation->load_generic_course_sections($course, $coursenode, 'jeelo');
+function callback_topics_load_content(&$navigation, $course, $coursenode) {
+    return $navigation->load_generic_course_sections($course, $coursenode, 'topics');
 }
 
 /**
@@ -53,7 +53,7 @@ function callback_jeelo_load_content(&$navigation, $course, $coursenode) {
  *
  * @return string
  */
-function callback_jeelo_definition() {
+function callback_topics_definition() {
     return get_string('topic');
 }
 
@@ -63,16 +63,16 @@ function callback_jeelo_definition() {
  *
  * @return string
  */
-function callback_jeelo_request_key() {
+function callback_topics_request_key() {
     return 'topic';
 }
 
-function callback_jeelo_get_section_name($course, $section) {
+function callback_topics_get_section_name($course, $section) {
     // We can't add a node without any text
     if ((string)$section->name !== '') {
         return format_string($section->name, true, array('context' => get_context_instance(CONTEXT_COURSE, $course->id)));
     } else if ($section->section == 0) {
-        return get_string('section0name', 'format_jeelo');
+        return get_string('section0name', 'format_topics');
     } else {
         return get_string('topic').' '.$section->section;
     }
@@ -84,7 +84,7 @@ function callback_jeelo_get_section_name($course, $section) {
  * @see course_format_ajax_support()
  * @return stdClass
  */
-function callback_jeelo_ajax_support() {
+function callback_topics_ajax_support() {
     $ajaxsupport = new stdClass();
     $ajaxsupport->capable = true;
     $ajaxsupport->testedbrowsers = array('MSIE' => 6.0, 'Gecko' => 20061111, 'Safari' => 531, 'Chrome' => 6.0);
@@ -98,6 +98,6 @@ function callback_jeelo_ajax_support() {
  * @param int $sectionnum The section number to jump to
  * @return moodle_url
  */
-function callback_jeelo_get_section_url($courseid, $sectionnum) {
+function callback_topics_get_section_url($courseid, $sectionnum) {
     return new moodle_url('/course/view.php', array('id' => $courseid, 'topic' => $sectionnum));
 }

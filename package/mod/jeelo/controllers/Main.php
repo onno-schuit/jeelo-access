@@ -64,18 +64,17 @@ class Main extends Soda2_Controller {
   public function __construct($soda2, $view = 'index') {
     parent::__construct($soda2, $view);
     $this->module = 'jeelo';
-
-    require_login();
   }
 
   public function index() {
-    $courses = $this->db->sql("SELECT * FROM {course} WHERE id != 1 AND format = 'jeelo' ORDER BY id ASC");
+    $courses = $this->db->sql("SELECT * FROM {course} WHERE id != 1 ORDER BY id ASC");
 
     $this->set('heading', 'Courses');
 
     $this->set('courses', $courses);
 
     $this->set('settings_heading', 'Settings');
+    $this->set('root_url', $this->base_url);
   }
 
   public function course_view($id) {
@@ -90,8 +89,6 @@ class Main extends Soda2_Controller {
   }
 
   public function course($id) {
-    $context = get_context_instance(CONTEXT_COURSE, $id);
-
     $this->course_id = $id;
 
     $this->_get_context();
@@ -315,17 +312,30 @@ class Main extends Soda2_Controller {
     $my_mods = array();
     $plural_mods = array();
 
+    $_settings = $this->db->sql("SELECT * FROM {jeelo_access_defaults}");
+    $defaults = array();
+    foreach($_settings as $config) {
+      $defaults[$config['config']] = $config['data'];
+    }
+
     foreach ($mods as $mod) {
       if ($mod->modname == 'jeelo') {
 	continue;
       }
+
       if (!array_key_exists($mod->modname, $my_mods)) {
 	$my_mods[$mod->modname] = array('instances'=>array(), 'plural'=>$mod->modplural);
+	if (array_key_exists($mod->modname, $defaults)) {
+	  $my_mods[$mod->modname]['plural'] = $defaults[$mod->modname];
+	}
+
+
 	$plural_mods[$mod->modname] = array();
       }
 
       $my_mods[$mod->modname]['instances'][] = $mod->id;
       $plural_mods[$mod->modname][$mod->id] = $mod->name;
+
     }
 
     return array($my_mods, $plural_mods);

@@ -11,18 +11,39 @@ class Settings extends Soda2_Controller {
 
   public function index() {
 
-    $settings = $this->db->sql("SELECT * FROM {jeelo_access_defaults}");
+    $modules = $this->db->sql("SELECT * FROM {modules}");
+    
+    $_settings = $this->db->sql("SELECT * FROM {jeelo_access_defaults}");
+    
+    $settings = array();
+
+    if (!is_null($_settings)) {
+      foreach($_settings as $config) {
+	$settings[$config['config']] = $config['data'];
+      }
+    }
+
+    foreach ($modules as $module) {
+      if ($module['name'] !== 'jeelo') {
+	if (!array_key_exists($module['name'], $settings)) {
+	  $settings[$module['name']] = '';
+	}
+      }
+    }
 
     $this->set('settings', $settings);
 
     if ($this->request->method == 'POST') {
-      foreach ($settings as $id=>$config) {
-	if ($this->request->post($config['key'], null) == null) {
-	  $this->db->sql(sprintf("UPDATE {jeelo_access_defaults} SET value = '%s' WHERE key = '%s'",
-				 $config['key'],
-				 $this->request->post($config['key'])));
+      if (!is_null($settings)) {
+	foreach ($settings as $id=>$config) {
+	  if ($this->request->post($id, '') !== '') {
+	    $this->db->insert('jeelo_access_defaults',
+			      array('config'=>$id,
+				    'data'=>$this->request->post($id)));
+	  }
 	}
       }
+
       $this->set('updated', true);
     }
   }

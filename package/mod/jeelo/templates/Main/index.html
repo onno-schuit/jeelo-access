@@ -3,6 +3,8 @@
 
 <ul>
   {loop="courses"}
-    <li><a href="/mod/jeelo/?course/{$value.id}/">{$value.fullname}</a></li>
+    <li><a href="{$root_url}/mod/jeelo/?course/{$value.id}/">{$value.fullname}</a></li>
   {/loop}
 </ul>
+
+<a href="{$root_url}/mod/jeelo/?settings/">Settings</a>
