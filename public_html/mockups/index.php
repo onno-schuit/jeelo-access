@@ -1,5 +1,6 @@
 <?php
 
+$static_host = defined('STATIC_HOST') ? STATIC_HOST : '';
 
 $columns = array("Leerroute", "Wiki's", "Films", "Toetsen");
 
@@ -387,12 +388,12 @@ function get_status($column, $sub_column, $sub_columns) {
 <html lang="en">
   <head>
       <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-      <script type="text/javascript" src="js/bootstrap.min.js"></script>
-      <script type="text/javascript" src="js/jquery.stickytableheaders.js"></script>
+      <script type="text/javascript" src="<?php echo $static_host; ?>js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="<?php echo $static_host; ?>js/jquery.stickytableheaders.js"></script>
       <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
-      <script type="text/javascript" src="js/main.js"></script>
-      <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
-      <link type="text/css" rel="stylesheet" href="css/main.css" />
+      <script type="text/javascript" src="<?php echo $static_host; ?>js/main.js"></script>
+      <link type="text/css" rel="stylesheet" href="<?php echo $static_host; ?>css/bootstrap.css" />
+      <link type="text/css" rel="stylesheet" href="<?php echo $static_host; ?>css/main.css" />
   </head>
   <body>
       <table>

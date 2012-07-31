@@ -64,10 +64,12 @@ class Main extends Soda2_Controller {
   public function __construct($soda2, $view = 'index') {
     parent::__construct($soda2, $view);
     $this->module = 'jeelo';
+
+    require_login();
   }
 
   public function index() {
-    $courses = $this->db->sql("SELECT * FROM {course} WHERE id != 1 ORDER BY id ASC");
+    $courses = $this->db->sql("SELECT * FROM {course} WHERE id != 1 AND format = 'jeelo' ORDER BY id ASC");
 
     $this->set('heading', 'Courses');
 
@@ -88,6 +90,8 @@ class Main extends Soda2_Controller {
   }
 
   public function course($id) {
+    $context = get_context_instance(CONTEXT_COURSE, $id);
+
     $this->course_id = $id;
 
     $this->_get_context();
