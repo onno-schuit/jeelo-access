@@ -314,8 +314,10 @@ class Main extends Soda2_Controller {
 
     $_settings = $this->db->sql("SELECT * FROM {jeelo_access_defaults}");
     $defaults = array();
-    foreach($_settings as $config) {
-      $defaults[$config['config']] = $config['data'];
+    if (!is_null($_settings)) {
+      foreach($_settings as $config) {
+	$defaults[$config['config']] = $config['data'];
+      }
     }
 
     foreach ($mods as $mod) {
