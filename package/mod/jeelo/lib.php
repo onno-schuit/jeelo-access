@@ -396,11 +396,7 @@ function jeelo_extend_settings_navigation(settings_navigation $settingsnav, navi
 global $CFG;
 $CFG->soda2_lib = $CFG->dirroot . '/local/soda2/';
 
-
 require_once($CFG->soda2_lib . 'class.soda2.php');
-
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
 
 $config = array(
 
