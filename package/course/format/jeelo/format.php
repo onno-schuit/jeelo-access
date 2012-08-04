@@ -60,7 +60,7 @@ if (count($course_access) > 0) {
 
 # Check if mod access is enabled
 foreach ($mods as $mod) {
-  $data = $DB->get_records('jeelo_access', array('type'=>$mod->modname,
+  $data = $DB->get_records('jeelo_access', array('type'=>$mod->section,
 					 'userid'=>$USER->id,
 					 'activity'=>$mod->id));
   if (count($data) > 0) {

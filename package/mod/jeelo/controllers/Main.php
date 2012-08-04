@@ -137,7 +137,7 @@ class Main extends Soda2_Controller {
 	}
 	
 	$table[] = $_user;
-    }
+      }
     }
 
     $this->set('table', $table);
@@ -309,9 +309,6 @@ class Main extends Soda2_Controller {
   private function _get_mods($id) {
     get_all_mods($id, &$mods, &$modnames, &$modnamesplural, &$modnamesused);
 
-    $my_mods = array();
-    $plural_mods = array();
-
     $_settings = $this->db->sql("SELECT * FROM {jeelo_access_defaults}");
     $defaults = array();
     if (!is_null($_settings)) {
@@ -319,6 +316,11 @@ class Main extends Soda2_Controller {
 	$defaults[$config['config']] = $config['data'];
       }
     }
+
+    $my_mods = array();
+    $plural_mods = array();
+
+    $pm = array();
 
     foreach ($mods as $mod) {
       if ($mod->modname == 'jeelo') {
@@ -338,7 +340,48 @@ class Main extends Soda2_Controller {
       $my_mods[$mod->modname]['instances'][] = $mod->id;
       $plural_mods[$mod->modname][$mod->id] = $mod->name;
 
+      $pm[$mod->id] = $mod->name;
+
     }
+    
+    $_jeelo_mod = $this->db->sql(sprintf("SELECT cm.id FROM {course_modules} cm, {modules} m 
+WHERE cm.course = '%s' AND cm.module = m.id AND m.name = 'jeelo'", $id));
+
+    if (is_null($_jeelo_mod)) {
+      $_jeelo_mod = array();
+    }
+
+    $sections = get_all_sections($id);
+
+    $sects = array();
+    $psects = array();
+
+    foreach ($sections as $section) {
+      if ($section->sequence !== NULL) {
+	$sect = get_course_section($section->id, $id); 
+
+	$name = '#' . $sect->section . '. ' . ((!is_null($sect->name)) ? $sect->name : '');
+
+	$_instances = explode(',', $section->sequence);
+	$instances = array();
+	$psects[$section->id] = array();
+
+	foreach($_instances as $instance) {
+	  if (array_key_exists($instance, $pm)) {
+	    $instances[] = $instance;
+	    $psects[$section->id][$instance] = $pm[$instance];
+	  }
+	}
+
+	$sects[$section->id] = array('plural'=>$name,
+				  'instances'=>explode(',', $section->sequence));
+
+      }
+    }
+    return array($sects, $psects);
+    _dump($psects);
+
+    _dump($sects);
 
     return array($my_mods, $plural_mods);
   }
