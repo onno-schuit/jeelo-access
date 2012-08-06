@@ -99,14 +99,14 @@ class Main extends Soda2_Controller {
 
     $default = $this->_mod_settings('access', 0); // defaults to false
 
-    $this->set('expanded', explode(',', $this->_mod_settings('expanded', 'quiz')));
+
 
     $users = $this->_get_users($id);
 
     $course = $this->db->record('course', array('id'=>$id));
     $this->set('course_id', $course['id']);
 
-
+    $this->set('expanded', array());
     $table = array();
     if (count($users) > 0) {
       foreach($users as $user) {
@@ -141,6 +141,7 @@ class Main extends Soda2_Controller {
 	
 	$table[] = $_user;
       }
+      $this->set('expanded', array($modname));
     }
 
     $this->set('table', $table);
