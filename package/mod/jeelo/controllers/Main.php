@@ -117,6 +117,8 @@ class Main extends Soda2_Controller {
 	    $_user['mods'][$modname] = array();
 	  }
 
+
+	  if (count($mod['instances']) > 0) {
 	  $access = $this->db->sql(sprintf("SELECT activity, level FROM {jeelo_access}
                                         WHERE type = '%s'
                                             AND activity IN (%s)
@@ -124,6 +126,7 @@ class Main extends Soda2_Controller {
 					   $modname,
 					   implode(',', $mod['instances']),
 					   $user['id']));
+	  }
 
 	  foreach($mod['instances'] as $instance) {
 	    if (!is_null($access) && array_key_exists($instance, $access)) {
@@ -372,7 +375,7 @@ WHERE cm.course = '%s' AND cm.module = m.id AND m.name = 'jeelo'", $id));
 	$psects[$section->id] = array();
 
 	foreach($_instances as $instance) {
-	  if (array_key_exists($instance, $pm)) {
+	  if ($instance !== '' && array_key_exists($instance, $pm)) {
 	    $instances[] = $instance;
 	    $psects[$section->id][$instance] = $pm[$instance];
 	  }
