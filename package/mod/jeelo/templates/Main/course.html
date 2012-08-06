@@ -23,12 +23,12 @@ var COURSE_ID = '{$course_id}';
 	<div>
           <div style="height:40px;overflow:hidden;">{$value.plural}</div>
           <div style="height:20px;">
-	    {if="in_array($key, $expanded)"}
-	    <a href="#" style="color: white" id="{$key}" class="show-all open">
-              <i class="icon-arrow-left icon-white"></i>
-              Verberg
+
+	    <a href="#" style="color: white" id="{$key}" class="show-all">
+	      Toon
+              <i class="icon-arrow-right icon-white"></i>
             </a>
-	    {/if}
+
           </div>
         </div>
         <button class="btn btn-warning group-toggler" type="{$key}">
