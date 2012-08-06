@@ -363,7 +363,7 @@ WHERE cm.course = '%s' AND cm.module = m.id AND m.name = 'jeelo'", $id));
       if ($section->sequence !== NULL) {
 	$_instances = explode(',', $section->sequence);
 
-	if (is_null($section->name) && count($_instances) == 0) {
+	if (is_null($section->name) || empty($section->name) || count($_instances) == 0) {
 	  // Skip section without title or instances
 	  continue;
 	}
