@@ -117,15 +117,15 @@ class Main extends Soda2_Controller {
 	    $_user['mods'][$modname] = array();
 	  }
 
-
+	  $access = NULL;
 	  if (count($mod['instances']) > 0) {
-	  $access = $this->db->sql(sprintf("SELECT activity, level FROM {jeelo_access}
+	    $access = $this->db->sql(sprintf("SELECT activity, level FROM {jeelo_access}
                                         WHERE type = '%s'
                                             AND activity IN (%s)
                                             AND userid = '%s'",
-					   $modname,
-					   implode(',', $mod['instances']),
-					   $user['id']));
+					     $modname,
+					     implode(',', $mod['instances']),
+					     $user['id']));
 	  }
 
 	  foreach($mod['instances'] as $instance) {
@@ -382,7 +382,7 @@ WHERE cm.course = '%s' AND cm.module = m.id AND m.name = 'jeelo'", $id));
 	}
 
 	$sects[$section->id] = array('plural'=>$name,
-				  'instances'=>explode(',', $section->sequence));
+				  'instances'=>$instances);
 
       }
     }
