@@ -358,11 +358,16 @@ WHERE cm.course = '%s' AND cm.module = m.id AND m.name = 'jeelo'", $id));
 
     foreach ($sections as $section) {
       if ($section->sequence !== NULL) {
+	$_instances = explode(',', $section->sequence);
+
+	if (is_null($section->name) && count($_instances) == 0) {
+	  // Skip section without title or instances
+	  continue;
+	}
 	$sect = get_course_section($section->id, $id); 
 
-	$name = '#' . $sect->section . '. ' . ((!is_null($sect->name)) ? $sect->name : '');
+	$name = ((!is_null($section->name)) ? $section->name : ('#' . $sect->section));
 
-	$_instances = explode(',', $section->sequence);
 	$instances = array();
 	$psects[$section->id] = array();
 
