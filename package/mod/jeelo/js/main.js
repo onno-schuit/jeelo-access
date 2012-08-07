@@ -99,7 +99,7 @@ $(function(){
     $('.col-toggler').live('click', function(e) {
 	var id = $(this).attr('gid');
         save('activity',
-             {'activity': $(this).attr('gid'), 'type': $(this).attr('type')},
+             {'activity': $(this).attr('gid'), 'type': $(this).attr('itype')},
              function(response, textStatus, jqXHR) {
                $('a.toggler[gid="' + id + '"]').each(function(i, item) {
                    set_status(item, 1);
@@ -108,7 +108,7 @@ $(function(){
     });
 
     $('.group-toggler').live('click', function(e) {
-        var type = $(this).attr('type');
+        var type = $(this).attr('itype');
         save('group',
              {'type': type},
              function(response, textStatus, jqXHR) {
