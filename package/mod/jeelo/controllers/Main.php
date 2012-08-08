@@ -60,6 +60,15 @@ function mod_name_plural($mods, $key, $value) {
   return $mods[$key][$value];
 }
 
+function ak($arry, $key, $key2) {
+  $key = $key . '_' . $key2;
+
+  if (array_key_exists($key, $arry)) {
+      return $arry[$key];
+  }
+  $key2;
+}
+
 class Main extends Soda2_Controller {
   public function __construct($soda2, $view = 'index') {
     parent::__construct($soda2, $view);
@@ -96,6 +105,8 @@ class Main extends Soda2_Controller {
     $mod_data = $this->_get_mods($id);
     $my_mods = $mod_data[0];
     $plural_mods = $mod_data[1];
+
+    $this->set('remods', $mod_data[2]);
 
     $default = $this->_mod_settings('access', 0); // defaults to false
 
@@ -387,7 +398,8 @@ WHERE cm.course = '%s' AND cm.module = m.id AND m.name = 'jeelo'", $id));
                 $_plural = $_[0];
             }
 	    
-	    $psects[$section->id][$instance] = $_plural;
+	    $psects[$section->id][$instance] = $pm[$instance];
+	    $remod_ids[$section->id . '_' . $instance] = $_plural;
 	  }
 	}
 
@@ -396,7 +408,7 @@ WHERE cm.course = '%s' AND cm.module = m.id AND m.name = 'jeelo'", $id));
 
       }
     }
-    return array($sects, $psects);
+    return array($sects, $psects, $remod_ids);
     _dump($psects);
 
     _dump($sects);

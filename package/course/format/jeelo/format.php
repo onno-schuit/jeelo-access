@@ -60,28 +60,31 @@ if (count($course_access) > 0) {
 
 # Check if mod access is enabled
 $_new_mods = array();
-foreach ($mods as $modid=>$mod) {
-  $data = $DB->get_records('jeelo_access', array('type'=>$mod->section,
-					 'userid'=>$USER->id,
-					 'activity'=>$mod->id));
-  if (count($data) > 0) {
-    foreach($data as $config) {
-      if ($config->level == 1) {
-	$mod->visible = true;
-      } else {
-	$mod->visible = false;
+if (has_capability('moodle/legacy:student', $context, $USER->id, false) ) {
+
+  foreach ($mods as $modid=>$mod) {
+    $data = $DB->get_records('jeelo_access', array('type'=>$mod->section,
+						   'userid'=>$USER->id,
+						   'activity'=>$mod->id));
+    if (count($data) > 0) {
+      foreach($data as $config) {
+	if ($config->level == 1) {
+	  $mod->visible = true;
+	} else {
+	  $mod->visible = false;
+	}
       }
+    } else {
+      $mod->visible = false; // Default to false
     }
-  } else {
-    $mod->visible = false; // Default to false
+    
+    if ($mod->visible) {
+      $_new_mods[$modid] = $mod;
+    }
   }
-
-  if ($mod->visible) {
-    $_new_mods[$modid] = $mod;
-  }
+  
+  $mods = $_new_mods;
 }
-
-$mods = $_new_mods;
 
 $streditsummary  = get_string('editsummary');
 $stradd          = get_string('add');

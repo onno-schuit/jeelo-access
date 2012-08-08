@@ -44,7 +44,7 @@ var COURSE_ID = '{$course_id}';
       <th class="sub {$key1}"{function="visibility($key1, $expanded)"}>
 	<div style="height:40px;"></div>
         <div style="height:20px;" class="tip" data-original-title="{function="mod_name_plural($plural_mods, $key1, $value2)"}">
-          {$value2} 
+          {function="ak($remods, $key1, $value2)"}
         </div>
                     
         <button class="btn btn-warning tip col-toggler" data-original-title="{function="mod_name_plural($plural_mods, $key1, $value2)"}" itype="{$key1}" gid="{$value2}">
