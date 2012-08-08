@@ -59,3 +59,7 @@ td:first-child, th:first-child
 .btn-primary {
     margin-bottom: 5px;
 }
+
+input, textarea {
+    width: auto;
+}
