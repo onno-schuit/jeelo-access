@@ -408,8 +408,8 @@ WHERE cm.course = '%s' AND cm.module = m.id AND m.name = 'jeelo'", $id));
     $contextid = get_context_instance(CONTEXT_COURSE, $id);
 
     $ssql = "SELECT u.id, u.username, u.lastname, u.firstname
-FROM {user} u, {role_assignments} r
-WHERE u.id=r.userid AND r.contextid = {$contextid->id}";
+FROM {user} u, {role_assignments} ra, {role} r
+WHERE u.id=ra.userid AND ra.roleid = r.id AND r.shortname = 'student' AND ra.contextid = {$contextid->id}";
     $users = $this->db->sql($ssql);
     return $users;
   }
