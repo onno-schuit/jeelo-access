@@ -60,7 +60,14 @@ if (count($course_access) > 0) {
 
 # Check if mod access is enabled
 $_new_mods = array();
-if (has_capability('moodle/legacy:student', $context, $USER->id, false) ) {
+$student = False;
+
+foreach (get_user_roles($context, $USER->id) as $_role) {
+   if ($_role->shortname == 'student') {
+     $student = True;
+   }
+}
+if ($student) {
 
   foreach ($mods as $modid=>$mod) {
     $data = $DB->get_records('jeelo_access', array('type'=>$mod->section,
