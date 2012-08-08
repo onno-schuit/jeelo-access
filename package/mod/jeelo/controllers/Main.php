@@ -359,6 +359,7 @@ WHERE cm.course = '%s' AND cm.module = m.id AND m.name = 'jeelo'", $id));
 
     $sects = array();
     $psects = array();
+    $remod_ids = array();
 
     foreach ($sections as $section) {
       if ($section->sequence !== NULL) {
@@ -378,7 +379,15 @@ WHERE cm.course = '%s' AND cm.module = m.id AND m.name = 'jeelo'", $id));
 	foreach($_instances as $instance) {
 	  if ($instance !== '' && array_key_exists($instance, $pm)) {
 	    $instances[] = $instance;
-	    $psects[$section->id][$instance] = $pm[$instance];
+
+	    $_plural = $pm[$instance];
+	    $_ = explode(' ', $_plural);
+
+	    if (count($_) > 1 && (int)$_[0] !== 0) {
+                $_plural = $_[0];
+            }
+	    
+	    $psects[$section->id][$instance] = $_plural;
 	  }
 	}
 
