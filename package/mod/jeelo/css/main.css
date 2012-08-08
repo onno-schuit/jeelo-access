@@ -60,6 +60,7 @@ td:first-child, th:first-child
     margin-bottom: 5px;
 }
 
-input, textarea {
-    width: auto;
+input.customcommand {
+    width: 11px;
+    height: 11px;
 }
