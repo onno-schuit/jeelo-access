@@ -59,7 +59,8 @@ if (count($course_access) > 0) {
 }
 
 # Check if mod access is enabled
-foreach ($mods as $mod) {
+$_new_mods = array();
+foreach ($mods as $modid=>$mod) {
   $data = $DB->get_records('jeelo_access', array('type'=>$mod->section,
 					 'userid'=>$USER->id,
 					 'activity'=>$mod->id));
@@ -74,7 +75,13 @@ foreach ($mods as $mod) {
   } else {
     $mod->visible = false; // Default to false
   }
+
+  if ($mod->visible) {
+    $_new_mods[$modid] = $mod;
+  }
 }
+
+$mods = $_new_mods;
 
 $streditsummary  = get_string('editsummary');
 $stradd          = get_string('add');
