@@ -84,6 +84,7 @@ class Main extends Soda2_Controller {
 
     $this->set('settings_heading', 'Settings');
     $this->set('root_url', $this->base_url);
+
   }
 
   public function course_view($id) {
@@ -101,6 +102,12 @@ class Main extends Soda2_Controller {
     $this->course_id = $id;
 
     $this->_get_context();
+
+    $context = get_context_instance(CONTEXT_COURSE, $id);
+    if (!has_capability('moodle/course:update', $context)) {
+      $this->raw = True;
+      return 'Sorry, you do not have an access to modify anything here';
+    }
 
     $mod_data = $this->_get_mods($id);
     $my_mods = $mod_data[0];
