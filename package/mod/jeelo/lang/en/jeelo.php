@@ -28,4 +28,4 @@ $string['jeelo:viewsubscribers'] = 'View subscribers';
 $string['jeelo:copydiscussion'] = 'Copy discussion';
 $string['jeelo:forwardposts'] = 'Forward posts';
 
-$string['access_required'] = "You do not have permission to open this page';
+$string['access_required'] = "You do not have permission to open this page";

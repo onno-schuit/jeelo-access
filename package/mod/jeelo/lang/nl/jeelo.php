@@ -9,4 +9,5 @@
   $string['newmodule'] = 'Paneel Individuele Toegang';
   $string['pluginadministration'] = 'Beheer Paneel Individuele Toegang';
   $string['pluginname'] = 'Paneel Individuele Toegang';
+  $string['access_required'] = "You do not have permission to open this page";
 ?>
