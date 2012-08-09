@@ -114,7 +114,7 @@ class Soda2_Controller {
       $PAGE->set_pagelayout('incourse');
       
       $strplural = get_string("modulenameplural", $this->module);
-      //      $PAGE->navbar->add($strplural);
+      $PAGE->navbar->add($strplural);
       $PAGE->set_title($strplural);
 
 
