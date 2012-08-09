@@ -62,6 +62,8 @@ if (count($course_access) > 0) {
 $_new_mods = array();
 $student = False;
 
+$controlled_sections = array();
+
 foreach (get_user_roles($context, $USER->id) as $_role) {
    if ($_role->shortname == 'student') {
      $student = True;
@@ -73,6 +75,10 @@ if ($student) {
     $data = $DB->get_records('jeelo_access', array('type'=>$mod->section,
 						   'userid'=>$USER->id,
 						   'activity'=>$mod->id));
+    if (!array_key_exists($mod->section, $controlled_sections)) {
+        $controlled_sections[$mod->section] = false;
+    }
+
     if (count($data) > 0) {
       foreach($data as $config) {
 	if ($config->level == 1) {
@@ -86,12 +92,16 @@ if ($student) {
     }
     
     if ($mod->visible) {
+      // if at least one mod in section is visible - set section as visible
+      $controlled_sections[$mod->section] = True;
       $_new_mods[$modid] = $mod;
     }
   }
   
   $mods = $_new_mods;
 }
+
+# End of jeelo access checks
 
 $streditsummary  = get_string('editsummary');
 $stradd          = get_string('add');
@@ -196,6 +206,16 @@ while ($section <= $course->numsections) {
     }
 
     $showsection = (has_capability('moodle/course:viewhiddensections', $context) or $thissection->visible or !$course->hiddensections);
+
+    # Jeelo access control
+    if ($student) {
+        if (array_key_exists($thissection->id, $controlled_sections)) {
+            if (!$controlled_sections[$thissection->id]) {
+                $showsection = False;
+            }
+        }
+    }
+    # EOF Jeelo access control
 
     if (!empty($displaysection) and $displaysection != $section) {  // Check this topic is visible
         if ($showsection) {
