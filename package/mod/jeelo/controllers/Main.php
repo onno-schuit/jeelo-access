@@ -198,6 +198,7 @@ class Main extends Soda2_Controller {
     $course = $this->db->record('course', array('id'=>$id));
     if ($this->request->post('userid', false)) {
       $user = $this->db->record('user', array('id'=>$this->request->post('userid')));
+      $status = $this->request->post('status', 1);
       
       $mods = $this->_get_mods($id);
 
@@ -207,7 +208,7 @@ class Main extends Soda2_Controller {
 	  $this->_save_access($key,
 			      $instance,
 			      $this->request->post('userid'),
-			      1);
+			      $status);
 
 	}
       }

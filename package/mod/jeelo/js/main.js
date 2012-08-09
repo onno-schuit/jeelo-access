@@ -85,12 +85,25 @@ $(function(){
     });
 
     $('.row-toggler').live('click', function(e) {
+        var status = 0;
+        if (this.innerHTML == '<i class="icon icon-ok icon-white"></i>') {
+            status = 1;
+        }
+        console.log(this.innerHTML);
+
         var userid = $(this).attr('user');
+        var ith = this;
         save('user',
-             {'userid': userid},
+             {'userid': userid, 'status': status},
              function(response, textStatus, jqXHR) {
+               if (status == 1) {
+                   ith.innerHTML = '<i class="icon icon-remove icon-white"></i>';
+               } else {
+                   ith.innerHTML = '<i class="icon icon-ok icon-white"></i>';
+               }
+
                $('a[user="' + userid + '"]').each(function(i, item) {
-                   set_status(item, 1);
+                   set_status(item, status);
                });
              });
         
