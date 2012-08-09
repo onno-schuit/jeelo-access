@@ -73,10 +73,27 @@ class Main extends Soda2_Controller {
   public function __construct($soda2, $view = 'index') {
     parent::__construct($soda2, $view);
     $this->module = 'jeelo';
+
+
   }
 
   public function index() {
     $courses = $this->db->sql("SELECT * FROM {course} WHERE id != 1 AND format = 'jeelo' ORDER BY id ASC");
+
+    $can_view = false;
+    foreach($courses as $course) {
+      $context = get_context_instance(CONTEXT_COURSE, $course['id']);
+      if (has_capability('moodle/course:update', $context)) {
+        $can_view = true;
+      }
+    }
+
+    if (!can_view) {
+      // Check if user can change at least one course
+      @include_once('lib/weblib.php');
+      print_error('nopermissions', '', '', 'moodle/course:update');
+      die();
+    }
 
     $this->set('heading', 'Courses');
 
@@ -105,8 +122,9 @@ class Main extends Soda2_Controller {
 
     $context = get_context_instance(CONTEXT_COURSE, $id);
     if (!has_capability('moodle/course:update', $context)) {
-      $this->raw = True;
-      return 'Sorry, you do not have an access to modify anything here';
+      @include_once('lib/weblib.php');
+      print_error('nopermissions', '', '', 'moodle/course:update');
+      die();
     }
 
     $mod_data = $this->_get_mods($id);

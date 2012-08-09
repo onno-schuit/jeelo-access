@@ -16,7 +16,7 @@ function soda2_error_handler($errno, $errstr, $errfile, $errline) {
 
 function soda2_exception_handler(Exception $e)
 {    
-    $errors = array(
+  $errors = array(
         E_USER_ERROR        => "User Error",
         E_USER_WARNING        => "User Warning",
         E_USER_NOTICE        => "User Notice",
@@ -132,8 +132,31 @@ class Soda2 {
 	$this->_dump(sprintf('No controller, damn %s', $_controller_file));
       }
     } catch (Exception $e) {
-      die($e);
-      $this->_dump($e->getMessage());
+      //$e;
+
+      if (! defined('HEADER_PRINTED')) {
+	//header not yet printed
+	@header('HTTP/1.0 404 Not Found');
+	print_header(get_string('error'));
+      } else {
+	print_container_end_all(false, $THEME->open_header_containers);
+      }
+      echo '<br />';
+  
+      print_simple_box($e->getMessage() , '', '', '', '', 'errorbox');
+  
+      debugging('Stack trace:', DEBUG_DEVELOPER);
+  
+      // in case we are logging upgrade in admin/index.php stop it
+      if (function_exists('upgrade_log_finish')) {
+          upgrade_log_finish();
+      }
+  
+
+  
+      print_footer();
+  
+      die();
     }
   }
 
