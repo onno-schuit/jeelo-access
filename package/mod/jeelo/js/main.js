@@ -97,23 +97,47 @@ $(function(){
     });
 
     $('.col-toggler').live('click', function(e) {
+        var status = 0;
+        if (this.innerHTML == '<i class="icon icon-ok icon-white"></i>') {
+            status = 1;
+        }
+
 	var id = $(this).attr('gid');
+        var ith = this;
         save('activity',
-             {'activity': $(this).attr('gid'), 'type': $(this).attr('itype')},
+             {'activity': $(this).attr('gid'), 'type': $(this).attr('itype'), 'status': status},
              function(response, textStatus, jqXHR) {
+               if (status == 1) {
+                   ith.innerHTML = '<i class="icon icon-remove icon-white"></i>';
+               } else {
+                   ith.innerHTML = '<i class="icon icon-ok icon-white"></i>';
+               }
+
                $('a.toggler[gid="' + id + '"]').each(function(i, item) {
-                   set_status(item, 1);
+                   set_status(item, status);
                });
              });
     });
 
     $('.group-toggler').live('click', function(e) {
+        var status = 0;
+        if (this.innerHTML == '<i class="icon icon-ok icon-white"></i>') {
+            status = 1;
+        }
+
         var type = $(this).attr('itype');
+        var ith = this;
         save('group',
-             {'type': type},
+             {'type': type, 'status': status},
              function(response, textStatus, jqXHR) {
+               if (status == 1) {
+                   ith.innerHTML = '<i class="icon icon-remove icon-white"></i>';
+               } else {
+                   ith.innerHTML = '<i class="icon icon-ok icon-white"></i>';
+               }
+
                $('a.toggler[type="' + type + '"]').each(function(i, item) {
-                   set_status(item, 1);
+                   set_status(item, status);
 		  // Set group status
 		  check_group_status(item, status);
                });

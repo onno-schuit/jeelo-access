@@ -36,9 +36,7 @@ var COURSE_ID = '{$course_id}';
 	    {/if}
           </div>
         </div>
-        <button class="btn btn-warning group-toggler" itype="{$key}">
-          <i class="icon icon-ok icon-white"></i>
-        </button>
+        <button class="btn btn-warning group-toggler" itype="{$key}"><i class="icon icon-ok icon-white"></i></button>
       </th>
       {loop="$value.instances"}
       <th class="sub {$key1}"{function="visibility($key1, $expanded)"}>
@@ -47,9 +45,7 @@ var COURSE_ID = '{$course_id}';
           {function="ak($remods, $key1, $value2)"}
         </div>
                     
-        <button class="btn btn-warning tip col-toggler" data-original-title="{function="mod_name_plural($plural_mods, $key1, $value2)"}" itype="{$key1}" gid="{$value2}">
-          <i class="icon icon-ok icon-white"></i>
-        </button>
+        <button class="btn btn-warning tip col-toggler" data-original-title="{function="mod_name_plural($plural_mods, $key1, $value2)"}" itype="{$key1}" gid="{$value2}"><i class="icon icon-ok icon-white"></i></button>
       </th>
       {/loop}
       {/loop}

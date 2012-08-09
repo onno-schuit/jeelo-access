@@ -223,12 +223,13 @@ class Main extends Soda2_Controller {
     $this->json = true;
     $course = $this->db->record('course', array('id'=>$id));
     if ($this->request->post('activity', false) && $this->request->post('type', false)) {
+      $status = $this->request->post('status', 1);
       $users = $this->db->sql("SELECT id FROM {user}");
       foreach ($users as $user) {
         $this->_save_access($this->request->post('type', 'quiz'),
                             $this->request->post('activity', 0),
                             $user['id'],
-                            1);
+                            $status);
       }
       return array('status' => 'ok');
     }
@@ -240,6 +241,7 @@ class Main extends Soda2_Controller {
     $this->json = true;
     if ($this->request->post('type', false)) {
       $users = $this->db->sql("SELECT id FROM {user}");
+      $status = $this->request->post('status', 1);
 
       $mods = $this->_get_mods($id);
 
@@ -252,7 +254,7 @@ class Main extends Soda2_Controller {
 	    $this->_save_access($this->request->post('type', 'quiz'),
 				$item,
 				$user['id'],
-				1);
+				$status);
 	  }
 	}
 
