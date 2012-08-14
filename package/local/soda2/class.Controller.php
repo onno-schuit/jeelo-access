@@ -96,6 +96,11 @@ class Soda2_Controller {
     $this->tpl->assign($key, $value);
   }
 
+  function navbar_add($str, $url) {
+      global $PAGE;
+      $PAGE->navbar->add($str, new moodle_url($url));
+  }
+
   function render($result){
     if ($this->raw) {
       echo $result;
@@ -114,6 +119,7 @@ class Soda2_Controller {
       $PAGE->set_pagelayout('incourse');
       
       $strplural = get_string("modulenameplural", $this->module);
+
       $PAGE->navbar->add($strplural);
       $PAGE->set_title($strplural);
 

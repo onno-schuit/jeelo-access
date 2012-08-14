@@ -118,6 +118,9 @@ class Main extends Soda2_Controller {
   public function course($id) {
     $this->course_id = $id;
 
+    $course = $this->db->record('course', array('id'=>$id));
+    $this->navbar_add($course['fullname'], '/course/view.php?id=' . $id);
+
     $this->_get_context();
 
     $context = get_context_instance(CONTEXT_COURSE, $id);

@@ -124,7 +124,7 @@ class Soda2 {
 
 	// Call view
 	$result = call_user_func_array(array($this->controller, $route[1]), $params);
-	
+
 	// Render view
 	$this->controller->render($result);
       } else {
