@@ -1,13 +1,13 @@
 <?php
-  // example contents for lang/en/jeelo.php
-  $string['modulename'] = "Jeelo Access control";
-  $string['modulenameplural'] = 'Jeelo Access control';
-  $string['modulename_help'] = 'Use the jeelo module for... | The jeelo module allows...';
-  $string['jeelofieldset'] = 'Custom example fieldset';
-  $string['jeelo_help'] = 'This is the content of the help tooltip associated with the jeeloname field. Markdown syntax is supported.';
-  $string['jeelo'] = 'jeelo';
-  $string['pluginadministration'] = 'jeelo administration';
-  $string['pluginname'] = 'jeelo';
+// example contents for lang/en/jeelo.php
+$string['modulename'] = "Jeelo Access control";
+$string['modulenameplural'] = 'Jeelo Access control';
+$string['modulename_help'] = 'Use the jeelo module for... | The jeelo module allows...';
+$string['jeelofieldset'] = 'Custom example fieldset';
+$string['jeelo_help'] = 'This is the content of the help tooltip associated with the jeeloname field. Markdown syntax is supported.';
+$string['jeelo'] = 'jeelo';
+$string['pluginadministration'] = 'jeelo administration';
+$string['pluginname'] = 'jeelo';
 $string['defaultaccess'] = 'Default access 0/1';
 $string['defaultexpanded'] = 'Default expandable';
 
