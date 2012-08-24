@@ -89,7 +89,6 @@ $(function(){
         if (this.innerHTML == '<i class="icon icon-ok icon-white"></i>') {
             status = 1;
         }
-        console.log(this.innerHTML);
 
         var userid = $(this).attr('user');
         var ith = this;

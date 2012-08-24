@@ -88,7 +88,7 @@ class Main extends Soda2_Controller {
       }
     }
 
-    if (!can_view) {
+    if (!$can_view) {
       // Check if user can change at least one course
       @include_once('lib/weblib.php');
       print_error('nopermissions', '', '', 'moodle/course:update');
