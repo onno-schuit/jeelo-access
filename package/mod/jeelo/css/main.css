@@ -64,3 +64,10 @@ input.customcommand {
     width: 11px;
     height: 11px;
 }
+
+#page-content #region-main {
+    overflow: auto;
+}
+#page-content .region-content {
+    overflow: auto;
+}
