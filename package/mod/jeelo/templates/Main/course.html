@@ -1,7 +1,6 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="{$root_url}/mod/jeelo/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{$root_url}/mod/jeelo/js/jquery.stickytableheaders.js"></script>
-<script type="text/javascript" src="https://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
 <script type="text/javascript" src="{$root_url}/mod/jeelo/js/main.js"></script>
 <link type="text/css" rel="stylesheet" href="{$root_url}/mod/jeelo/css/bootstrap.css" />
 <link type="text/css" rel="stylesheet" href="{$root_url}/mod/jeelo/css/main.css" />
@@ -10,6 +9,15 @@
 var COURSE_ID = '{$course_id}';
 </script>
 
+<div class="alert" id="err" style="display: none; position: fixed; bottom: 150px; right: 0px;">
+  <!--<button type="button" class="close" data-dismiss="alert">×</button>-->
+  <strong>Warning!</strong> Data wasn't saved.
+</div>
+
+<div class="alert alert-info" id="saved" style="display: none; position: fixed; bottom: 150px; right: 0px;">
+  <!--<button type="button" class="close" data-dismiss="alert">×</button>-->
+  <strong>OK!</strong> Saved.
+</div>
 <h3>{$course_name}</h3>
 
 <table>
@@ -39,7 +47,7 @@ var COURSE_ID = '{$course_id}';
           </div>
         </div>
 	<br clear="all" />
-        <button class="btn btn-warning group-toggler" itype="{$key}"><i class="icon icon-ok icon-white"></i></button>
+        <button class="btn btn-warning group-toggler" itype="{$key}"><span class="icon icon-ok icon-white"></span></button>
       </th>
       {loop="$value.instances"}
       <th class="sub {$key1}"{function="visibility($key1, $expanded)"}>
@@ -48,7 +56,7 @@ var COURSE_ID = '{$course_id}';
           {function="ak($remods, $key1, $value2)"}
         </div>
 	<br clear="all" />      
-        <button class="btn btn-warning tip col-toggler" data-original-title="{function="mod_name_plural($plural_mods, $key1, $value2)"}" itype="{$key1}" gid="{$value2}"><i class="icon icon-ok icon-white"></i></button>
+        <button class="btn btn-warning tip col-toggler" data-original-title="{function="mod_name_plural($plural_mods, $key1, $value2)"}" itype="{$key1}" gid="{$value2}"><span class="icon icon-ok icon-white"></span></button>
       </th>
       {/loop}
       {/loop}
@@ -61,17 +69,17 @@ var COURSE_ID = '{$course_id}';
 	{$value.user.firstname} {$value.user.lastname}
       </td>
       <td>
-	<button class="btn btn-warning row-toggler" user="{$value.user.id}"><i class="icon icon-ok icon-white"></i></button>
+	<button class="btn btn-warning row-toggler" user="{$value.user.id}"><span class="icon icon-ok icon-white">&nbsp;</span></button>
                       
       </td>
       {loop="$value.mods"}
       <td>
-	<a href="javascript:void(0);" status='{function="get_status_column($value2, true)"}' class="user-group-toggler" data-original-title="{$key2}" type="{$key2}" user="{$value1.user.id}" style="margin-left: 5px;"><i class='icon icon-{function="get_status_column($value2)"}'></i></a>
+	<a href="javascript:void(0);" status='{function="get_status_column($value2, true)"}' class="user-group-toggler" data-original-title="{$key2}" type="{$key2}" user="{$value1.user.id}" style="margin-left: 5px;"><span class='icon icon-{function="get_status_column($value2)"}'>&nbsp;</span></a>
       </td>
       {loop="value2"}
         <!--  subcol -->
         <td class="sub {$key2}"{function="visibility($key2, $expanded)"}>
-          <a href="javascript:void(0);" gid="{$key3}" status="{$value3}" type="{$key2}" class="toggler" user="{$value1.user.id}" style="margin-left: 5px;"><i class='icon icon-{function="get_status($value3)"}'></i></a>
+          <a href="javascript:void(0);" gid="{$key3}" status="{$value3}" type="{$key2}" class="toggler" user="{$value1.user.id}" style="margin-left: 5px;"><span class='icon icon-{function="get_status($value3)"}'>&nbsp;</span></a>
         </td>
         <!-- subcol eof -->
       {/loop}

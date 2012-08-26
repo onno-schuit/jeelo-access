@@ -1,4 +1,6 @@
 
+var savedTimer;
+
 function set_status(item, status) {
   if (status == 1) {
     item.innerHTML = '<i class="icon icon-ok icon-green"></i>';
@@ -14,7 +16,7 @@ function check_group_status(item, status) {
     var user = $(item).attr('user');
     var type = $(item).attr('type');
 
-    var arrs = [];
+    var arrs = Array();
     $('.toggler[user="' + user + '"][type="' + type + '"]').each(function(i, item) {
 	arrs.push(parseInt($(item).attr('status')));
     });
@@ -40,8 +42,21 @@ function save(action, params, callback) {
     data: params,
     dataType: 'json',
 
-    success: callback
+    success: function(response, textStatus, jqXHR) {
+	$('#saved').css({'display': 'block'});
+	savedTimer = setTimeout('close_alert("saved")', 5000);
+	callback(response, textStatus, jqXHR);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+	$('#err').css({'display': 'block'});
+	savedTimer = setTimeout('close_alert("err")', 5000);
+    }
   });
+}
+
+function close_alert(id) {
+    clearTimeout(savedTimer);
+    $('#' + id).css({'display': 'none'});
 }
 
 $(function(){

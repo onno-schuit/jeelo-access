@@ -462,7 +462,8 @@ WHERE cm.course = '%s' AND cm.module = m.id AND m.name = 'jeelo'", $id));
 
     $ssql = "SELECT u.id, u.username, u.lastname, u.firstname
 FROM {user} u, {role_assignments} ra, {role} r
-WHERE u.id=ra.userid AND ra.roleid = r.id AND r.shortname = 'student' AND ra.contextid = {$contextid->id}";
+WHERE u.id=ra.userid AND ra.roleid = r.id AND r.shortname = 'student' AND ra.contextid = {$contextid->id}
+ORDER BY u.lastname ASC";
     $users = $this->db->sql($ssql);
     return $users;
   }
