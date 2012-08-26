@@ -53,7 +53,7 @@ var COURSE_ID = '{$course_id}';
       <th class="sub {$key1}"{function="visibility($key1, $expanded)"}>
 	<div style="height:40px;"></div>
         <div style="height:20px;" class="tip" data-original-title="{function="mod_name_plural($plural_mods, $key1, $value2)"}">
-          {function="ak($remods, $key1, $value2)"}
+          {function="substr(ak($remods, $key1, $value2), 0, 20)"}
         </div>
 	<br clear="all" />      
         <button class="btn btn-warning tip col-toggler" data-original-title="{function="mod_name_plural($plural_mods, $key1, $value2)"}" itype="{$key1}" gid="{$value2}"><span class="icon icon-ok icon-white"></span></button>
