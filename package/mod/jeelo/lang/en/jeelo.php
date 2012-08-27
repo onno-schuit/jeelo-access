@@ -29,3 +29,6 @@ $string['jeelo:copydiscussion'] = 'Copy discussion';
 $string['jeelo:forwardposts'] = 'Forward posts';
 
 $string['access_required'] = "You do not have permission to open this page";
+
+$string['status_ok'] = "<strong>OK!</strong> Saved.";
+$string['status_err'] = "<strong>Warning!</strong> Data wasn't saved.";
