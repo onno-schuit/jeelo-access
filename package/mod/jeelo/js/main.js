@@ -1,3 +1,13 @@
+if(!Array.indexOf){
+    Array.prototype.indexOf = function(obj){
+	for(var i=0; i<this.length; i++){
+	    if(this[i]==obj){
+	        return i;
+	    }
+	}
+	return -1;
+    }
+}
 
 var savedTimer;
 
@@ -23,6 +33,7 @@ function check_group_status(item, status) {
 
     var group_toggler = $('.user-group-toggler[user="' + user + '"][type="' + type + '"]').get(0);
 
+    alert(arrs.indexOf(0));
     if (arrs.indexOf(0) == -1) {
 	// All set to true
 	set_status(group_toggler, 1);
@@ -33,6 +44,7 @@ function check_group_status(item, status) {
 	// Custom
 	set_status(group_toggler, 2);
     }
+    alert('done');
 }
 
 function save(action, params, callback) {
@@ -92,6 +104,7 @@ $(function(){
     $('.tip').tooltip();
 
     $('.global-toggler').live('click', function(e) {
+	alert(this.innerHTML.toLowerCase());
         if (this.innerHTML.toLowerCase() == '<span class="icon icon-ok icon-white">&nbsp; &nbsp;</span>') {
             this.innerHTML = '<span class="icon icon-remove icon-white">&nbsp; &nbsp;</span>';
         } else { // None and Part cases
@@ -165,8 +178,8 @@ $(function(){
 
                $('a.toggler[type="' + type + '"]').each(function(i, item) {
                    set_status(item, status);
-		  // Set group status
-		  check_group_status(item, status);
+		   // Set group status
+		   check_group_status(item, status);
                });
              });
     });
