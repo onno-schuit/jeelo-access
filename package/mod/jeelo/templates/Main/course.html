@@ -35,19 +35,19 @@ var COURSE_ID = '{$course_id}';
           <div style="height:20px;">
 	    {if="in_array($key, $expanded)"}
 	    <a href="#" style="color: white" id="{$key}" class="show-all open">
-              <i class="icon-arrow-left icon-white"></i>
+              <span class="icon-arrow-left icon-white">&nbsp; &nbsp;</span>
               Verberg
             </a>
 	    {else}
 	    <a href="#" style="color: white" id="{$key}" class="show-all">
 	      Toon
-	      <i class="icon-arrow-right icon-white"></i>
+	      <span class="icon-arrow-right icon-white">&nbsp; &nbsp;</span>
 	    </a>
 	    {/if}
           </div>
         </div>
 	<br clear="all" />
-        <button class="btn btn-warning group-toggler" itype="{$key}"><span class="icon icon-ok icon-white"></span></button>
+        <button class="btn btn-warning group-toggler" itype="{$key}"><span class="icon icon-ok icon-white">&nbsp; &nbsp;</span></button>
       </th>
       {loop="$value.instances"}
       <th class="sub {$key1}"{function="visibility($key1, $expanded)"}>
@@ -56,7 +56,7 @@ var COURSE_ID = '{$course_id}';
           {function="substr(ak($remods, $key1, $value2), 0, 20)"}
         </div>
 	<br clear="all" />      
-        <button class="btn btn-warning tip col-toggler" data-original-title="{function="mod_name_plural($plural_mods, $key1, $value2)"}" itype="{$key1}" gid="{$value2}"><span class="icon icon-ok icon-white"></span></button>
+        <button class="btn btn-warning tip col-toggler" data-original-title="{function="mod_name_plural($plural_mods, $key1, $value2)"}" itype="{$key1}" gid="{$value2}"><span class="icon icon-ok icon-white">&nbsp; &nbsp;</span></button>
       </th>
       {/loop}
       {/loop}
@@ -69,17 +69,17 @@ var COURSE_ID = '{$course_id}';
 	{$value.user.firstname} {$value.user.lastname}
       </td>
       <td>
-	<button class="btn btn-warning row-toggler" user="{$value.user.id}"><span class="icon icon-ok icon-white">&nbsp;</span></button>
+	<button class="btn btn-warning row-toggler" user="{$value.user.id}"><span class="icon icon-ok icon-white">&nbsp; &nbsp;</span></button>
                       
       </td>
       {loop="$value.mods"}
       <td>
-	<a href="javascript:void(0);" status='{function="get_status_column($value2, true)"}' class="user-group-toggler" data-original-title="{$key2}" type="{$key2}" user="{$value1.user.id}" style="margin-left: 5px;"><span class='icon icon-{function="get_status_column($value2)"}'>&nbsp;</span></a>
+	<a href="javascript:void(0);" status='{function="get_status_column($value2, true)"}' class="user-group-toggler" data-original-title="{$key2}" type="{$key2}" user="{$value1.user.id}" style="margin-left: 5px;"><span class='icon icon-{function="get_status_column($value2)"}'>&nbsp; &nbsp;</span></a>
       </td>
       {loop="value2"}
         <!--  subcol -->
         <td class="sub {$key2}"{function="visibility($key2, $expanded)"}>
-          <a href="javascript:void(0);" gid="{$key3}" status="{$value3}" type="{$key2}" class="toggler" user="{$value1.user.id}" style="margin-left: 5px;"><span class='icon icon-{function="get_status($value3)"}'>&nbsp;</span></a>
+          <a href="javascript:void(0);" gid="{$key3}" status="{$value3}" type="{$key2}" class="toggler" user="{$value1.user.id}" style="margin-left: 5px;"><span class='icon icon-{function="get_status($value3)"}'>&nbsp; &nbsp;</span></a>
         </td>
         <!-- subcol eof -->
       {/loop}
