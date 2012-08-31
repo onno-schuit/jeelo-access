@@ -46,22 +46,29 @@ function check_group_status(item, status) {
 }
 
 function save(action, params, callback) {
-  $.ajax({
-    type: 'POST',
-    url: '/mod/jeelo/?course/' + COURSE_ID + '/save_' + action + '.json',
-    data: params,
-    dataType: 'json',
+    // Show Saving... block
+    $('#saving').css({'display': 'block'});
 
-    success: function(response, textStatus, jqXHR) {
-	$('#saved').css({'display': 'block'});
-	savedTimer = setTimeout('close_alert("saved")', 5000);
-	callback(response, textStatus, jqXHR);
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-	$('#err').css({'display': 'block'});
-	savedTimer = setTimeout('close_alert("err")', 5000);
-    }
-  });
+    // Update buttons status
+    callback();
+    $.ajax({
+	type: 'POST',
+	url: '/mod/jeelo/?course/' + COURSE_ID + '/save_' + action + '.json',
+	data: params,
+	dataType: 'json',
+	
+	success: function(response, textStatus, jqXHR) {
+	    close_alert('saving');
+	},
+	error: function(jqXHR, textStatus, errorThrown) {
+	    // Hide Saving... block
+	    close_alert('saving');
+
+	    // Display error message for 5 seconds
+	    $('#err').css({'display': 'block'});
+	    savedTimer = setTimeout('close_alert("err")', 5000);
+	}
+    });
 }
 
 function close_alert(id) {
@@ -89,11 +96,9 @@ $(function(){
 	save('one',
              {'id': id, 'type': type, 'status': status, 'userid': userid},
              function(response, textStatus, jqXHR) {
-		if (response.status == 'ok') {
                   set_status(tglr, status);
 		  // Set group status
 		  check_group_status(tglr, status);
-		}
              });
 
 
@@ -119,7 +124,7 @@ $(function(){
         var ith = this;
         save('user',
              {'userid': userid, 'status': status},
-             function(response, textStatus, jqXHR) {
+             function() {
                if (status == 1) {
                    ith.innerHTML = '<span class="icon icon-remove icon-white">&nbsp; &nbsp;</span>';
                } else {
@@ -143,7 +148,7 @@ $(function(){
         var ith = this;
         save('activity',
              {'activity': $(this).attr('gid'), 'type': $(this).attr('itype'), 'status': status},
-             function(response, textStatus, jqXHR) {
+             function() {
                if (status == 1) {
                    ith.innerHTML = '<span class="icon icon-remove icon-white">&nbsp; &nbsp;</span>';
                } else {
@@ -166,7 +171,7 @@ $(function(){
         var ith = this;
         save('group',
              {'type': type, 'status': status},
-             function(response, textStatus, jqXHR) {
+             function() {
                if (status == 1) {
                    ith.innerHTML = '<span class="icon icon-remove icon-white">&nbsp; &nbsp;</span>';
                } else {
@@ -192,7 +197,7 @@ $(function(){
         var gt = this;
         save('user_group',
              {'userid': user, 'type': type, 'status': status},
-             function(response, textStatus, jqXHR) {
+             function() {
                $('a.toggler[type="' + type + '"][user="' + user + '"]').each(function(i, item){
                    set_status(item, status);
                });
