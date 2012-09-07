@@ -234,7 +234,8 @@ class Main extends Soda2_Controller {
       }
 
       # Simple hack, last topic is expanded
-      $this->set('expanded', array($modname));
+      # - On second thoughts, client doesn't want any column expanded by default
+      //$this->set('expanded', array($modname));
     }
 
     $this->set('table', $table);
