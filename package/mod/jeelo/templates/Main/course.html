@@ -20,14 +20,30 @@ var COURSE_ID = '{$course_id}';
 </div>
 <h3>{$course_name}</h3>
 
-<table>
+<table style="float:left">
   <thead>
     <tr>
-      <th width="200px" style="padding-left: 10px">
+      <th width="200px" style="padding-left: 10px; height: 125px;">
 	<div style="height:55px;"></div>
           Leerlingen
       </th>
-      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    {loop="table"}
+    <tr>
+      <td style="height: 52px;">
+	{$value.user.firstname} {$value.user.lastname}
+      </td>
+    </tr>
+    {/loop}
+</table>
+
+
+<table class='jeeloGrid'>
+  <thead>
+    <tr>
+      <th style="height: 125px;">&nbsp;</th>
       {loop="mods"}
       <th width="100px">
 	<div>
@@ -65,10 +81,7 @@ var COURSE_ID = '{$course_id}';
   <tbody>
     {loop="table"}
     <tr>
-      <td>
-	{$value.user.firstname} {$value.user.lastname}
-      </td>
-      <td>
+      <td style="height:52px;">
 	<button class="btn btn-warning row-toggler" user="{$value.user.id}"><span class="icon icon-ok icon-white">&nbsp; &nbsp;</span></button>
                       
       </td>

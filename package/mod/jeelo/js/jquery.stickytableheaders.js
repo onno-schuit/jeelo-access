@@ -1,5 +1,5 @@
 $(function(){
-    $("table").stickyTableHeaders();
+    $("table.jeeloGrid").stickyTableHeaders();
 });
 
 /*! Copyright (c) 2011 by Jonas Mosbech - https://github.com/jmosbech/StickyTableHeaders 

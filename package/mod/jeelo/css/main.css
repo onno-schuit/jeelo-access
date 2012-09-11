@@ -33,10 +33,12 @@ tbody tr:nth-child(2n)
 {
     background-color: #F7F7F7;
 }
+/* Now using two tables, and we don't have time to cross sync hovers
 tbody tr:hover
 {
     background-color: #EEEEEE;
 }
+  */
 td
 {
 }
